@@ -1,0 +1,19 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../dist/server",
+    "module": "commonjs",
+    "paths": {
+      // ts-node path resolution issues, do not use
+      "@client/*": ["../client/*"],
+      "@server/*": ["../server/*"],
+      "@shared/*": ["../shared/*"],
+      "@config/*": ["config/*"],
+      "@controller/*": ["controllers/*"],
+      "@model/*": ["models/*"],
+      "@util/*": ["utils/*"],
+      "@route/*": ["routes/*"],
+      "@interface/*": ["interfaces/*"]
+    }
+  }
+}
