@@ -18,7 +18,7 @@ const userSchema = new Schema(
       trim: true,
       unique: true,
     },
-    lastSignOn: Date,
+    lastSignIn: Date,
     lastIpAddress: String,
   },
   {
@@ -31,7 +31,7 @@ export interface IUser extends Document {
   lastName: string;
   email: string;
 
-  lastSignOn: Date;
+  lastSignIn: Date;
   lastIpAddress: string;
 }
 export interface UserModel extends Model<IUser> {}

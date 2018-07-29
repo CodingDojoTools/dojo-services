@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import {
   BreakpointObserver,
   Breakpoints,
@@ -15,7 +15,13 @@ import { map } from 'rxjs/operators';
 export class NavigationComponent {
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
-    .pipe(map(result => result.matches));
+    .pipe(map((result: BreakpointState) => result.matches));
+
+  @Output() logout = new EventEmitter<never>();
 
   constructor(private breakpointObserver: BreakpointObserver) {}
+
+  onClick() {
+    this.logout.emit();
+  }
 }

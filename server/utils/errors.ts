@@ -3,6 +3,8 @@ export abstract class BaseError extends Error {
 }
 
 export class UnAuthorizedError extends BaseError {
+  message = `You are not authorized to access this resource.
+    Contact the adminstrator for more information`;
   readonly code = 401;
 }
 

@@ -3,12 +3,31 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { environment } from '@env/environment';
 
-const routes: Routes = [];
+import { DashboardModule } from '@app/dashboard';
+import * as fromContainers from './root/containers';
+
+const enableTracing = false && !environment.production;
+
+const routes: Routes = [
+  {
+    path: '',
+    component: fromContainers.HomeComponent,
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => DashboardModule,
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full',
+  },
+];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-      enableTracing: !environment.production,
+      enableTracing,
     }),
   ],
   exports: [RouterModule],

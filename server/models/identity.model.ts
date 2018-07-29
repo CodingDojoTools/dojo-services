@@ -7,6 +7,7 @@ const identitySchema = new Schema(
       type: String,
       required: true,
       trim: true,
+      lowercase: true,
     },
     user: {
       type: ObjectId,

@@ -15,23 +15,19 @@ import { getAuthServiceConfigs } from '@app/config';
 import * as fromRoot from '@app/root';
 
 import { SharedModule } from '@app/shared';
+import { DashboardModule } from '@app/dashboard';
 
 @NgModule({
-  declarations: [AppComponent, ...fromRoot.components],
+  declarations: [AppComponent, ...fromRoot.components, ...fromRoot.containers],
   imports: [
     SharedModule,
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
+    DashboardModule,
     FontAwesomeModule,
     HttpClientModule,
     SocialLoginModule.initialize(getAuthServiceConfigs()),
-  ],
-  providers: [
-    // {
-    //   provide: AuthServiceConfig,
-    //   useFactory: getAuthServiceConfigs,
-    // },
   ],
   bootstrap: [AppComponent],
 })

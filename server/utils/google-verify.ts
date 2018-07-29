@@ -1,10 +1,12 @@
 import { OAuth2Client } from 'google-auth-library';
 
 import { TokenPayload, Google } from '../interfaces';
-import { TokenError } from './errors';
+import { PRODUCTION } from '../config';
+import { TokenError, UnAuthorizedError } from './errors';
 
 const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const emailReg = new RegExp('[a-z]*@codingdojo.com', 'i');
 
 export abstract class AuthHelper {
   abstract provider: string;
@@ -46,6 +48,14 @@ export class GoogleAuthHelper extends AuthHelper {
 
     this.payload = ticket.getPayload();
 
+    if (this.notOrgMember(this.payload.hd)) {
+      throw new UnAuthorizedError('Log in with your Coding Dojo account');
+    }
+
     return this;
+  }
+
+  private notOrgMember(domain: string) {
+    return PRODUCTION && (!domain || !emailReg.test(domain));
   }
 }

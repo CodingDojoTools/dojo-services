@@ -7,7 +7,7 @@ export const authRouter = Router();
 
 authRouter
   // for now
-  .use(
+  .post(
     '/login/:provider',
     wrapper(authController.googleSignIn, authController)
   );

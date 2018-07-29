@@ -36,6 +36,6 @@ const exportable: any[] = [
 @NgModule({
   declarations,
   imports: [CommonModule, ...exportable],
-  exports: [...exportable, ...declarations],
+  exports: [CommonModule, ...exportable, ...declarations],
 })
 export class SharedModule {}

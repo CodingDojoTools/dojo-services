@@ -1,6 +1,6 @@
 import * as debuggable from 'debug';
-import { ENV, PRODUCTION } from '../config';
+import { ENV } from '../config';
 
-export const debug = PRODUCTION
-  ? (..._rest: any[]) => {}
-  : debuggable(`dojo_services_${ENV}`);
+const capped = ENV.charAt(0).toUpperCase() + ENV.substr(1);
+
+export const debug = debuggable(`DojoServices${capped}`);

@@ -7,23 +7,15 @@ class AuthController {
   async googleSignIn(request: Request, response: Response): Promise<any> {
     const { body: userData }: { body: SocialUser } = request;
 
-    debug('user data', userData);
-
     const google: GoogleAuthHelper = await AuthHelper.for(
       'google',
       userData
     ).verify();
-
     const lastIpAddress = getIP(request);
-
-    debug('last ip', lastIpAddress);
-
-    const user = new CreateUpdateUserHelper(google, {
+    const user = await new CreateUpdateUserHelper(google, {
       ...userData,
       lastIpAddress,
-    });
-
-    debug('user model', user);
+    }).getUser();
 
     /**
      * @todo
@@ -31,7 +23,7 @@ class AuthController {
      * create token
      */
 
-    response.json({ user });
+    response.json(user);
   }
 }
 
@@ -89,14 +81,17 @@ class CreateUpdateUserHelper {
     return await this.identity.create({
       ...payload,
       user,
+      provider: this.provider.provider,
       providerId: payload.sub,
     });
   }
 
   private async updateUser(user: IUser, lastIpAddress: string): Promise<IUser> {
-    return await user.update({
-      $set: { lastIpAddress, lastSignIn: Date.now() },
-    });
+    return await this.user.findByIdAndUpdate(
+      user._id,
+      { $set: { lastIpAddress, lastSignIn: Date.now() } },
+      { new: true }
+    );
   }
 }
 
