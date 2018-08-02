@@ -1,27 +1,37 @@
-# DojoServices
+# Requirements
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+- [MongoDB](https://www.mongodb.com/download-center#community)
+- [Yarn](https://yarnpkg.com/en/docs/install)
+- [Node](https://nodejs.org/en/)
+- [Redis](https://redis.io/download)
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Install project dependencies
+`yarn install`
 
-## Code scaffolding
+Rename `.env.example` to `.env` and fill in the appropriate details.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Start
 
-## Build
+`yarn start`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Contribution
 
-## Running unit tests
+Create branches for features/changes.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+`git checkout -B my-feature-or-bug-fix`
 
-## Running end-to-end tests
+Add files...
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+`git add -A` per usual
 
-## Further help
+then...  
+`yarn run commit`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Follow the prompts answering the questions.
+
+Push changes to remote branch for review:  
+`git push origin my-feature-or-bug-fix`
+
+Open merge request where appropriate
