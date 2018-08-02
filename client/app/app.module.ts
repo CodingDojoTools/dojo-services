@@ -1,34 +1,49 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { SocialLoginModule } from 'angularx-social-login';
 
-import { AppRoutingModule } from '@app/app-routing.module';
-import { AppComponent } from '@app/app.component';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 // config
 import { getAuthServiceConfigs } from '@app/config';
 
-import * as fromRoot from '@app/root';
+// env
+import { environment } from '@env/environment';
 
-import { SharedModule } from '@app/shared';
+import { effects, reducers, metaReducers } from '@app/store';
+import { CoreModule, RootComponent } from '@app/core';
 import { DashboardModule } from '@app/dashboard';
+import { AuthModule } from '@auth/auth.module';
+import { SharedModule } from '@app/shared';
 
 @NgModule({
-  declarations: [AppComponent, ...fromRoot.components, ...fromRoot.containers],
+  declarations: [],
   imports: [
     SharedModule,
+    AuthModule.forRoot(),
+    CoreModule.forRoot(),
     BrowserAnimationsModule,
     BrowserModule,
-    AppRoutingModule,
     DashboardModule,
-    FontAwesomeModule,
     HttpClientModule,
     SocialLoginModule.initialize(getAuthServiceConfigs()),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+    }),
+    StoreDevtoolsModule.instrument({
+      name: 'Dojo Services NgRx DevTools',
+      logOnly: environment.production,
+    }),
+    EffectsModule.forRoot(effects),
   ],
-  bootstrap: [AppComponent],
+  providers: [],
+  bootstrap: [RootComponent],
 })
 export class AppModule {}

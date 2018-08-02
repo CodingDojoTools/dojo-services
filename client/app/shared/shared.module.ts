@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import {
   MatButtonModule,
   MatMenuModule,
@@ -20,6 +23,7 @@ import {
 const declarations: any[] = [MatSort, MatPaginator, MatNavList];
 
 const exportable: any[] = [
+  FontAwesomeModule,
   MatSidenavModule,
   MatTableModule,
   MatButtonModule,

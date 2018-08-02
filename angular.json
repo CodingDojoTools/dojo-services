@@ -8,7 +8,12 @@
       "sourceRoot": "client",
       "projectType": "application",
       "prefix": "app",
-      "schematics": {},
+      "schematics": {
+        "@ngrx/schematics:component": {
+          "changeDetection": "OnPush",
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -93,5 +98,8 @@
       }
     }
   },
-  "defaultProject": "dojo-services"
+  "defaultProject": "dojo-services",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

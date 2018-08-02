@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthenticationService } from '@app/services';
+import { AuthenticationService } from '@auth/services';
 
 @Component({
   selector: 'app-dashboard',
