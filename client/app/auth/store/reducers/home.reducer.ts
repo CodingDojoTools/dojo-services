@@ -12,7 +12,9 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: AuthActions): State {
   switch (action.type) {
+    case AuthActionTypes.GoogleLogin:
     case AuthActionTypes.Login: {
+      console.log('what waht ', action.type);
       return {
         ...state,
         error: null,

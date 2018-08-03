@@ -1,6 +1,7 @@
 body {
   background-color: #f2f2f2;
 }
+
 #wrapper {
   margin: 0px auto;
 }
@@ -103,13 +104,13 @@ body {
   #login_process_list {
     margin-bottom: 0px;
 
-    .log_in_with_gmail .or_label {
+    &.log_in_with_gmail .or_label {
       text-align: center;
       display: block;
       padding: 4px 0px;
     }
 
-    .log_in_with_gmail .form_notification_gmail {
+    &.log_in_with_gmail .form_notification_gmail {
       display: block;
       margin-top: 5px;
       font-size: 10px;
@@ -146,7 +147,7 @@ ul.list-unstyled {
   list-style-type: none;
 }
 
-// globals of some kind...
+/* globals of some kind... */
 
 @media (max-width: 1199px) {
   .container {

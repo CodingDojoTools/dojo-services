@@ -44,6 +44,7 @@ export class Logout implements Action {
 }
 
 export type AuthActions =
+  | GoogleLogin
   | Login
   | LoginSuccess
   | LoginFailure

@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
 
-import { AuthenticationService } from '@auth/services';
+import * as fromStore from '@auth/store';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,14 +10,11 @@ import { AuthenticationService } from '@auth/services';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
-  constructor(
-    private readonly auth: AuthenticationService,
-    private readonly router: Router
-  ) {}
+  constructor(private readonly store: Store<fromStore.State>) {}
 
   ngOnInit() {}
 
   onLogout() {
-    this.auth.logout().subscribe(() => this.router.navigateByUrl('/'));
+    this.store.dispatch(new fromStore.Logout());
   }
 }

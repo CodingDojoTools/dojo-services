@@ -3,5 +3,16 @@
 @import './variables';
 @import './theme';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: 'Roboto', sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
