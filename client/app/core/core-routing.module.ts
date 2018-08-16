@@ -22,6 +22,11 @@ const routes: Routes = [
     loadChildren: () => DashboardModule,
   },
   {
+    path: 'facilities',
+    canLoad: [AuthGuard],
+    loadChildren: '@facility/facility.module#FacilityModule',
+  },
+  {
     path: '**',
     component: fromContainers.NotFoundComponent,
   },

@@ -23,7 +23,11 @@ class AuthController {
      * create token
      */
 
-    response.json(user);
+    response.json({ user, isNew: user.isNew });
+  }
+
+  logout() {
+    // invalidate token
   }
 }
 
@@ -61,7 +65,7 @@ class CreateUpdateUserHelper {
   }
 
   private async findUser(email: string) {
-    return await this.user.findOne({ email });
+    return await this.user.findOne({ email }).lean();
   }
 
   private async createUserAndIdentity(): Promise<IUser> {

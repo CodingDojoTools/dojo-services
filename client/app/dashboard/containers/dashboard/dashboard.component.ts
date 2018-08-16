@@ -1,7 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-
-import * as fromStore from '@auth/store';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,11 +7,5 @@ import * as fromStore from '@auth/store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardComponent implements OnInit {
-  constructor(private readonly store: Store<fromStore.State>) {}
-
   ngOnInit() {}
-
-  onLogout() {
-    this.store.dispatch(new fromStore.Logout());
-  }
 }

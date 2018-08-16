@@ -8,7 +8,7 @@ import * as fromActions from '../actions';
 import * as fromRoot from '@app/store';
 
 import { AuthenticationService } from '@auth/services';
-import { User } from '@auth/models';
+import { LoggedUser } from '@auth/models';
 
 @Injectable()
 export class AuthEffects {
@@ -26,7 +26,11 @@ export class AuthEffects {
   @Effect()
   loginSuccess$ = this.actions$.pipe(
     ofType(fromActions.AuthActionTypes.LoginSuccess),
-    map(() => new fromRoot.Go({ path: ['/'] }))
+    map(
+      (logged: LoggedUser) =>
+        logged.isNew ? `/facilities/users/${logged.user._id}/profile` : '/'
+    ),
+    map(path => new fromRoot.Go({ path: [path] }))
   );
 
   @Effect()
@@ -44,7 +48,7 @@ export class AuthEffects {
     map(action => action.payload),
     exhaustMap(socialUser =>
       this.authService.login(socialUser).pipe(
-        map((user: User) => new fromActions.LoginSuccess({ user })),
+        map((user: LoggedUser) => new fromActions.LoginSuccess(user)),
         catchError(error => of(new fromActions.LoginFailure(error)))
       )
     )

@@ -20,6 +20,7 @@ import { effects, reducers, metaReducers } from '@app/store';
 import { CoreModule, RootComponent } from '@app/core';
 import { DashboardModule } from '@app/dashboard';
 import { AuthModule } from '@auth/auth.module';
+import { FacilityModule } from '@app/facility';
 import { SharedModule } from '@app/shared';
 
 @NgModule({
@@ -32,6 +33,7 @@ import { SharedModule } from '@app/shared';
     BrowserModule,
     DashboardModule,
     HttpClientModule,
+    FacilityModule,
     SocialLoginModule.initialize(getAuthServiceConfigs()),
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot({

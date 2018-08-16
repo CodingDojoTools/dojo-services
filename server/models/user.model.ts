@@ -1,6 +1,8 @@
 import { Document, Model, Schema, model } from 'mongoose';
+import { ObjectID } from 'bson';
 
 const { ObjectId } = Schema.Types;
+
 const userSchema = new Schema(
   {
     firstName: {
@@ -20,6 +22,20 @@ const userSchema = new Schema(
     },
     lastSignIn: Date,
     lastIpAddress: String,
+    photoUrl: String,
+    location: {
+      type: ObjectId,
+      ref: 'Location',
+    },
+    variant: {
+      type: ObjectID,
+      ref: 'LocationVariant'
+    },
+    active: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
   },
   {
     timestamps: true,
@@ -33,6 +49,11 @@ export interface IUser extends Document {
 
   lastSignIn: Date;
   lastIpAddress: string;
+
+  active: boolean;
+  photoUrl: string;
+  location: string;
+  variant: string;
 }
 export interface UserModel extends Model<IUser> {}
 

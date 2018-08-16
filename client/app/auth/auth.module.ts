@@ -13,12 +13,12 @@ import * as fromServices from './services';
 import * as fromGuards from './guards';
 import * as fromStore from './store';
 
-const COMPONENTS = [...fromComponents.components, ...fromContainers.containers];
+const components = [...fromComponents.components, ...fromContainers.containers];
 
 @NgModule({
   imports: [CommonModule, SharedModule],
-  declarations: COMPONENTS,
-  exports: COMPONENTS,
+  declarations: components,
+  exports: components,
 })
 export class AuthModule {
   static forRoot(): ModuleWithProviders {

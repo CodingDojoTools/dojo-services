@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import {
   BreakpointObserver,
   Breakpoints,
@@ -18,6 +18,7 @@ export class NavigationComponent {
     .pipe(map((result: BreakpointState) => result.matches));
 
   @Output() logout = new EventEmitter<never>();
+  @Input() loggedIn: boolean;
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 

@@ -1,6 +1,6 @@
 import { SocialUser } from 'angularx-social-login';
 import { Action } from '@ngrx/store';
-import { User } from '@auth/models';
+import { User, LoggedUser } from '@auth/models';
 
 export enum AuthActionTypes {
   Login = '[Auth] Login',
@@ -18,15 +18,13 @@ export class GoogleLogin implements Action {
 export class Login implements Action {
   readonly type = AuthActionTypes.Login;
 
-  constructor(public payload: SocialUser) {
-    console.log(this);
-  }
+  constructor(public payload: SocialUser) {}
 }
 
 export class LoginSuccess implements Action {
   readonly type = AuthActionTypes.LoginSuccess;
 
-  constructor(public payload: { user: User }) {}
+  constructor(public payload: LoggedUser) {}
 }
 
 export class LoginFailure implements Action {

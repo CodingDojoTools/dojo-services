@@ -5,6 +5,12 @@
 - [Node](https://nodejs.org/en/)
 - [Redis](https://redis.io/download)
 
+## Editor Plugins
+
+- EditorConfig
+- Prettier
+- TSLint
+
 ## Installation
 
 Install project dependencies
