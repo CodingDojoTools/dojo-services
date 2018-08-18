@@ -1,5 +1,7 @@
-import { UserEffects } from './user.actions';
+import { LocationEffects } from './location.effects';
+import { UserEffects } from './user.effects';
 
-export const effects: any[] = [UserEffects];
+export const effects: any[] = [LocationEffects, UserEffects];
 
-export * from './user.actions';
+export * from './location.effects';
+export * from './user.effects';

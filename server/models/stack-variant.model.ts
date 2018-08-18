@@ -1,6 +1,6 @@
 import { model, Schema, Document, Model } from 'mongoose';
 
-const locationVariantSchema = new Schema({
+const stackVariantSchema = new Schema({
   type: {
     type: String,
     required: [true, 'Variant type is required information'],
@@ -14,14 +14,14 @@ const locationVariantSchema = new Schema({
   },
 });
 
-export interface ILocationVariant extends Document {
+export interface IStackVariant extends Document {
   type: string;
   active: boolean;
 }
 
-export interface LocationVariantModel extends Model<ILocationVariant> {}
+export interface StackVariantModel extends Model<IStackVariant> {}
 
-export const LocationVariant: LocationVariantModel = model<ILocationVariant>(
-  'LocationVariant',
-  locationVariantSchema
+export const StackVariant: StackVariantModel = model<IStackVariant>(
+  'StackVariant',
+  stackVariantSchema
 );

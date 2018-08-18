@@ -18,6 +18,10 @@ Install project dependencies
 
 Rename `.env.example` to `.env` and fill in the appropriate details.
 
+## Database Seed
+
+`yarn seed`
+
 ## Start
 
 `yarn start`
@@ -33,7 +37,7 @@ Add files...
 `git add -A` per usual
 
 then...  
-`yarn run commit`
+`yarn commit`
 
 Follow the prompts answering the questions.
 

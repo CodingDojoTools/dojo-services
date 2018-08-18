@@ -7,6 +7,12 @@ class AuthController {
   async googleSignIn(request: Request, response: Response): Promise<any> {
     const { body: userData }: { body: SocialUser } = request;
 
+    debug(
+      `Logging in Google Account for ${userData.firstName} ${
+        userData.lastName
+      } with ${userData.email}`
+    );
+
     const google: GoogleAuthHelper = await AuthHelper.for(
       'google',
       userData
@@ -22,6 +28,10 @@ class AuthController {
      * setup session
      * create token
      */
+
+    debug(
+      `Successfully logged in ${user.firstName}. First visit? ${user.isNew}`
+    );
 
     response.json({ user, isNew: user.isNew });
   }
@@ -70,12 +80,17 @@ class CreateUpdateUserHelper {
 
   private async createUserAndIdentity(): Promise<IUser> {
     const user = await this.createUser(this.userData);
-    await this.createIdentity(this.provider.payload, user.id);
+    await this.createIdentity(this.provider.payload, user._id);
     return user;
   }
 
   private async createUser(userData: SocialUser): Promise<IUser> {
-    return await this.user.create({ ...userData, lastSignIn: Date.now() });
+    const user = new this.user({ ...userData, lastSignIn: Date.now() });
+    const { isNew } = user;
+
+    await user.save();
+
+    return { ...user.toObject(), isNew };
   }
 
   private async createIdentity(

@@ -19,6 +19,8 @@ export abstract class BaseController implements CRUD {
       await this.model
         .findByIdAndUpdate(request.params[this.param], request.body, {
           new: true,
+          runValidators: true,
+          setDefaultsOnInsert: true,
         })
         .lean()
     );

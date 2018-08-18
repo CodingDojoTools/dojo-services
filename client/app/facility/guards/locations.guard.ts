@@ -2,21 +2,22 @@ import { Injectable, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StoreEntitiesGuard } from '@app/core';
 
-import * as fromInjector from '../injectors';
+import * as fromInjectors from '../injectors';
 import * as fromStore from '../store';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UsersGuard extends StoreEntitiesGuard<
+export class LocationsGuard extends StoreEntitiesGuard<
   fromStore.FacilitiesState,
-  fromStore.UserActions
+  fromStore.LocationActions
 > {
-  selector = fromStore.getUsersLoaded;
+  selector = fromStore.getLocationsLoaded;
 
   constructor(
     protected readonly store: Store<fromStore.FacilitiesState>,
-    @Inject(fromInjector.USERS_LOAD) protected loader: fromStore.UsersLoad
+    @Inject(fromInjectors.LOCATIONS_LOAD)
+    protected loader: fromStore.LocationsLoad
   ) {
     super(store, loader);
   }

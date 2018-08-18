@@ -1,5 +1,4 @@
 import { Document, Model, Schema, model } from 'mongoose';
-import { ObjectID } from 'bson';
 
 const { ObjectId } = Schema.Types;
 
@@ -27,10 +26,6 @@ const userSchema = new Schema(
       type: ObjectId,
       ref: 'Location',
     },
-    variant: {
-      type: ObjectID,
-      ref: 'LocationVariant'
-    },
     active: {
       type: Boolean,
       required: true,
@@ -53,7 +48,6 @@ export interface IUser extends Document {
   active: boolean;
   photoUrl: string;
   location: string;
-  variant: string;
 }
 export interface UserModel extends Model<IUser> {}
 

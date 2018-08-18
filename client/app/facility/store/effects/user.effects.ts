@@ -1,12 +1,13 @@
-import { catchError, map, switchMap, toArray } from 'rxjs/operators';
+import { catchError, map, switchMap, toArray, tap } from 'rxjs/operators';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
-import { Update } from '@ngrx/entity';
 import { of } from 'rxjs';
 
 import { UserService } from '../../services';
 import { UserActionTypes } from '../actions';
 import * as fromActions from '../actions';
+
+import { debug } from '@app/utils';
 
 @Injectable()
 export class UserEffects {
@@ -24,6 +25,9 @@ export class UserEffects {
   @Effect()
   loadUser$ = this.actions$.pipe(
     ofType(UserActionTypes.LoadUser),
+    tap(action =>
+      debug(`action ${action.type} with payload ${(action as any).payload}`)
+    ),
     map((action: fromActions.UserLoad) => action.payload),
     switchMap(show =>
       this.userService.show(show).pipe(

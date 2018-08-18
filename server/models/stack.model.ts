@@ -11,7 +11,7 @@ const stackSchema = new Schema({
   },
   variant: {
     type: ObjectId,
-    ref: 'LocationVariant',
+    ref: 'StackVariant',
     required: true,
   },
   active: {

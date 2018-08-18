@@ -9,6 +9,7 @@ import * as fromRoot from '@app/store';
 
 import { AuthenticationService } from '@auth/services';
 import { LoggedUser } from '@auth/models';
+import { debug } from '@app/utils';
 
 @Injectable()
 export class AuthEffects {
@@ -26,11 +27,23 @@ export class AuthEffects {
   @Effect()
   loginSuccess$ = this.actions$.pipe(
     ofType(fromActions.AuthActionTypes.LoginSuccess),
-    map(
-      (logged: LoggedUser) =>
-        logged.isNew ? `/facilities/users/${logged.user._id}/profile` : '/'
+    map((action: fromActions.LoginSuccess) => action.payload),
+    tap(logged =>
+      debug(
+        `Successfully logged in ${logged.user.firstName} ${
+          logged.user.lastName
+        }. First login? ${logged.isNew}`,
+        logged
+      )
     ),
-    map(path => new fromRoot.Go({ path: [path] }))
+    // map(
+    //   (logged: LoggedUser) =>
+    //     logged.isNew ? `/facilities/users/${logged.user._id}/profile` : '/'
+    // ),
+    map(logged => `/facilities/users/${logged.user._id}/profile`),
+    tap(path => debug(`Path after logging in is ${path}`)),
+    map(path => new fromRoot.Go({ path: [path] })),
+    catchError(error => of(new fromActions.LoginFailure(error)))
   );
 
   @Effect()

@@ -1,9 +1,5 @@
 import { model, Schema, Document, Model } from 'mongoose';
 
-import { ILocationVariant } from './location-variant.model';
-import { IStack } from './stack.model';
-import { IUser } from './user.model';
-
 const { ObjectId } = Schema.Types;
 
 const locationSchema = new Schema({
@@ -35,8 +31,8 @@ const locationSchema = new Schema({
 export interface ILocation extends Document {
   city: string;
   address: string;
-  stacks: Array<IStack>;
-  employees: Array<IUser>;
+  stacks: string[];
+  employees: string[];
 }
 
 export interface LocationModel extends Model<ILocation> {}

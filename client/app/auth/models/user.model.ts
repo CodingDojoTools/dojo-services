@@ -10,7 +10,6 @@ export interface User {
   active: boolean;
   photoUrl: string;
   location: string;
-  variant: string;
 }
 
 export interface LoggedUser {

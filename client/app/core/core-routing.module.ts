@@ -8,7 +8,7 @@ import { AuthGuard } from '@auth/guards';
 
 import * as fromContainers from './containers';
 
-const enableTracing = true && !environment.production;
+const enableTracing = false && !environment.production;
 
 const routes: Routes = [
   {
