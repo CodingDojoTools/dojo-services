@@ -39,5 +39,5 @@ export const getSelectedLocation = createSelector(
   getLocationEntities,
   fromRoot.getRouterState,
   (entities, router): Location =>
-    router.state && entities[router.state.root.params.location_id]
+    router.state && entities[router.state.params.location_id]
 );

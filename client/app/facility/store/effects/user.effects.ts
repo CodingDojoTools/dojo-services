@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 import { UserService } from '../../services';
 import { UserActionTypes } from '../actions';
 import * as fromActions from '../actions';
+import * as fromRouter from '@app/store';
 
 import { debug } from '@app/utils';
 
@@ -66,6 +67,13 @@ export class UserEffects {
         catchError(error => of(new fromActions.UserUpdateFail(error)))
       )
     )
+  );
+
+  @Effect()
+  updateSuccess = this.actions$.pipe(
+    ofType(UserActionTypes.UpdateUserSuccess),
+
+    map(() => new fromRouter.Go({ path: ['/dashboard'] }))
   );
 
   constructor(

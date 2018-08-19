@@ -35,7 +35,6 @@ export const getUsers = createSelector(getUserEntities, entities =>
 export const getSelectedUser = createSelector(
   getUserEntities,
   fromRoot.getRouterState,
-  (entities, router): User => {
-    return router.state && entities[router.state.root.params.user_id];
-  }
+  (entities, router): User =>
+    router.state && entities[router.state.params.user_id]
 );

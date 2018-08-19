@@ -16,7 +16,7 @@
 Install project dependencies
 `yarn install`
 
-Rename `.env.example` to `.env` and fill in the appropriate details.
+Copy `.env.example` to `.env` and fill in the appropriate details.
 
 ## Database Seed
 

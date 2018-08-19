@@ -392,16 +392,16 @@
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
 
 "@types/mongodb@*":
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.1.3.tgz#73a2dba96cc10e9c9b0670a1a34a0caefe2c6c37"
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.1.4.tgz#f0f6dc8d509500c4a8213238066b68f0c8cb25a9"
   dependencies:
     "@types/bson" "*"
     "@types/events" "*"
     "@types/node" "*"
 
 "@types/mongoose@^5.2.2":
-  version "5.2.5"
-  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.2.5.tgz#3a8467549744c105515299acc6f590e5403fb277"
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-5.2.6.tgz#96b89f8a35b37b3beb5bf50572ac6cf7f7d52453"
   dependencies:
     "@types/events" "*"
     "@types/mongodb" "*"
@@ -419,11 +419,7 @@
   dependencies:
     "@types/express" "*"
 
-"@types/node@*":
-  version "10.5.8"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.8.tgz#6f14ccecad1d19332f063a6a764f8907801fece0"
-
-"@types/node@^10.5.2":
+"@types/node@*", "@types/node@^10.5.2":
   version "10.7.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.7.1.tgz#b704d7c259aa40ee052eec678758a68d07132a2e"
 
@@ -1297,7 +1293,11 @@ browserstack@^1.5.1:
   dependencies:
     https-proxy-agent "^2.2.1"
 
-bson@~1.0.4, bson@~1.0.5:
+bson@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/bson/-/bson-1.1.0.tgz#bee57d1fb6a87713471af4e32bcae36de814b5b0"
+
+bson@~1.0.5:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/bson/-/bson-1.0.9.tgz#12319f8323b1254739b7c6bef8d3e89ae05a2f57"
 
@@ -5023,20 +5023,20 @@ moment@^2.22.2:
   version "2.22.2"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
 
-mongodb-core@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-3.1.0.tgz#af91f36fd560ed785f4e61e694432df4d3698aad"
+mongodb-core@3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-3.1.2.tgz#c85055a2691ac3661951e557a0d6482796ad5c42"
   dependencies:
-    bson "~1.0.4"
+    bson "^1.1.0"
     require_optional "^1.0.1"
   optionalDependencies:
     saslprep "^1.0.0"
 
-mongodb@3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.1.1.tgz#c018c4b277614e8b1e08426d5bcbe1a7e5cdbd74"
+mongodb@3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.1.3.tgz#7523d438d190e80a757c5947dbc226768cb7b1d5"
   dependencies:
-    mongodb-core "3.1.0"
+    mongodb-core "3.1.2"
 
 mongoose-legacy-pluralize@1.0.2:
   version "1.0.2"
@@ -5050,15 +5050,15 @@ mongoose-unique-validator@^2.0.1:
     lodash.get "^4.0.2"
 
 mongoose@^5.2.5:
-  version "5.2.8"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.2.8.tgz#dd74ce0c4df803cb816c37ee1228d6663e2c2254"
+  version "5.2.9"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.2.9.tgz#1b4a01de776504193ecdeda87c0c7d1962c2d632"
   dependencies:
     async "2.6.1"
     bson "~1.0.5"
     kareem "2.2.1"
     lodash.get "4.4.2"
-    mongodb "3.1.1"
-    mongodb-core "3.1.0"
+    mongodb "3.1.3"
+    mongodb-core "3.1.2"
     mongoose-legacy-pluralize "1.0.2"
     mpath "0.4.1"
     mquery "3.1.2"
@@ -6681,9 +6681,13 @@ semver-intersect@^1.1.2:
   dependencies:
     semver "^5.0.0"
 
-"semver@2 >=2.2.1 || 3.x || 4 || 5", "semver@2 || 3 || 4 || 5", semver@^5.0.0, semver@^5.1.0, semver@^5.3.0, semver@^5.5.0:
+"semver@2 >=2.2.1 || 3.x || 4 || 5", "semver@2 || 3 || 4 || 5", semver@^5.0.0, semver@^5.3.0, semver@^5.5.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
+
+semver@^5.1.0:
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.1.tgz#7dfdd8814bdb7cabc7be0fb1d734cfb66c940477"
 
 semver@~5.3.0:
   version "5.3.0"

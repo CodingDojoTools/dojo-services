@@ -10,7 +10,7 @@ import { SharedModule } from '@app/shared';
 import { reducers, effects } from './store';
 
 import * as fromContainers from './containers';
-// import * as fromComponents from './components';
+import * as fromComponents from './components';
 import * as fromServices from './services';
 import * as fromGuards from './guards';
 
@@ -22,7 +22,7 @@ import * as fromGuards from './guards';
     EffectsModule.forFeature(effects),
     StoreModule.forFeature('facilities', reducers),
   ],
-  declarations: [...fromContainers.containers],
+  declarations: [...fromContainers.containers, ...fromComponents.components],
   providers: [...fromServices.services, ...fromGuards.guards],
 })
 export class FacilityModule {}

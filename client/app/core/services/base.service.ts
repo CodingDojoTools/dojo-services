@@ -23,7 +23,11 @@ export abstract class BaseService<T extends Resource> {
   }
 
   update(resource: T): Observable<T> {
-    return this.http.put<T>(`${this.base}/${resource.id}`, resource);
+    debug(
+      `Requesting update resources using ${this.base} and ${resource._id}`,
+      resource
+    );
+    return this.http.put<T>(`${this.base}/${resource._id}`, resource);
   }
 
   create(resource: T): Observable<T> {
@@ -36,6 +40,5 @@ export abstract class BaseService<T extends Resource> {
 }
 
 export interface Resource {
-  id?: string;
   _id?: string;
 }

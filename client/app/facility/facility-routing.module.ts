@@ -15,7 +15,10 @@ const routes: Routes = [
       },
       {
         path: ':user_id',
-        canActivateChild: [fromGuards.UserExistsGuard],
+        canActivateChild: [
+          fromGuards.UserExistsGuard,
+          fromGuards.LocationsGuard,
+        ],
         children: [
           {
             path: '',

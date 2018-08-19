@@ -18,7 +18,7 @@ if (!PRODUCTION) {
   *  When successfully connected
   */
   mongoose.connection.on('connected', () => {
-    console.log(`Mongoose default connection open to ${uri}`);
+    debug(`Mongoose default connection open to ${uri}`);
   });
 
   /*
@@ -43,7 +43,7 @@ if (!PRODUCTION) {
   *  When the connection is disconnected
   */
   mongoose.connection.on('disconnected', () => {
-    console.log('Mongoose default connection disconnected');
+    debug('Mongoose default connection disconnected');
   });
 
   /*
@@ -51,7 +51,7 @@ if (!PRODUCTION) {
   */
   process.on('SIGINT', () => {
     mongoose.connection.close(() => {
-      console.log(
+      debug(
         'Mongoose default connection disconnected through program termination'
       );
       process.exit(0);

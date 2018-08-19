@@ -50,7 +50,7 @@ export function reducer(state = initialState, action: LocationActions) {
       return adapter.removeOne(action.payload._id, state);
 
     case LocationActionTypes.ClearLocations:
-      return adapter.removeAll(state);
+      return initialState;
 
     default:
       return state;

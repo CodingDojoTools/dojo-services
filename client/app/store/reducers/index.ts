@@ -1,9 +1,5 @@
 import { environment } from '@env/environment';
-import {
-  Params,
-  RouterStateSnapshot,
-  ActivatedRouteSnapshot,
-} from '@angular/router';
+import { Params, RouterStateSnapshot } from '@angular/router';
 import {
   ActionReducerMap,
   createSelector,
@@ -22,9 +18,15 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import * as fromRouter from '@ngrx/router-store';
 import * as fromLayout from '@app/core/store';
 
+export interface RouterStateUrl {
+  url: string;
+  queryParams: Params;
+  params: Params;
+}
+
 export interface State {
   layout: fromLayout.State;
-  router: fromRouter.RouterReducerState;
+  router: fromRouter.RouterReducerState<RouterStateUrl>;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -33,7 +35,7 @@ export const reducers: ActionReducerMap<State> = {
 };
 
 export const getRouterState = createFeatureSelector<
-  fromRouter.RouterReducerState
+  fromRouter.RouterReducerState<RouterStateUrl>
 >('router');
 
 // console.log all actions
@@ -58,3 +60,21 @@ export const getShowSidenav = createSelector(
   getLayoutState,
   fromLayout.getShowSidenav
 );
+
+export class CustomSerializer
+  implements fromRouter.RouterStateSerializer<RouterStateUrl> {
+  serialize(routerState: RouterStateSnapshot): RouterStateUrl {
+    const { url } = routerState;
+    const { queryParams } = routerState.root;
+
+    let { root: state } = routerState;
+
+    while (state.firstChild) {
+      state = state.firstChild;
+    }
+
+    const { params } = state;
+
+    return { url, queryParams, params };
+  }
+}

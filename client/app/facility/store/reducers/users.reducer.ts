@@ -44,6 +44,9 @@ export function reducer(state = initialState, action: UserActions): UserState {
     case UserActionTypes.RemoveUserSuccess:
       return adapter.removeOne(action.payload._id, state);
 
+    case UserActionTypes.ClearUsers:
+      return initialState;
+
     default:
       return state;
   }

@@ -17,11 +17,13 @@ export abstract class BaseController implements CRUD {
   async update(request: Request, response: Response) {
     response.json(
       await this.model
-        .findByIdAndUpdate(request.params[this.param], request.body, {
-          new: true,
-          runValidators: true,
-          setDefaultsOnInsert: true,
-        })
+        .findByIdAndUpdate(
+          request.params[this.param],
+          { $set: request.body },
+          {
+            new: true,
+          }
+        )
         .lean()
     );
   }

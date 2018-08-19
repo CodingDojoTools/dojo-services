@@ -11,7 +11,8 @@
       "schematics": {
         "@ngrx/schematics:component": {
           "changeDetection": "OnPush",
-          "styleext": "scss"
+          "styleext": "scss",
+          "skipImport": true
         }
       },
       "architect": {
@@ -26,8 +27,7 @@
             "assets": ["client/favicon.ico", "client/assets"],
             "styles": [
               {
-                "input":
-                  "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
               },
               "client/sass/styles.scss"
             ],
@@ -79,8 +79,7 @@
             "karmaConfig": "client/karma.conf.js",
             "styles": [
               {
-                "input":
-                  "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
               },
               "client/sass/styles.scss"
             ],

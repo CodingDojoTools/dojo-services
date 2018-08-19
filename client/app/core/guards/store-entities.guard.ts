@@ -22,7 +22,7 @@ export abstract class StoreEntitiesGuard<T, A extends Action>
 
   canActivate(
     _next: ActivatedRouteSnapshot,
-    _state: RouterStateSnapshot
+    _state?: RouterStateSnapshot
   ): Observable<boolean> {
     return this.checkStore().pipe(
       switchMap(() => of(true)),
