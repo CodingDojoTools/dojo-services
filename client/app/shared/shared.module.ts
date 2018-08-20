@@ -1,3 +1,4 @@
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
@@ -20,9 +21,18 @@ import {
   MatTableModule,
 } from '@angular/material';
 
-const declarations: any[] = [MatSort, MatPaginator, MatNavList];
+import * as fromPipes from './pipes';
+
+const declarations: any[] = [
+  MatSort,
+  MatPaginator,
+  MatNavList,
+  ...fromPipes.pipes,
+];
 
 const exportable: any[] = [
+  FormsModule,
+  ReactiveFormsModule,
   FontAwesomeModule,
   MatSidenavModule,
   MatTableModule,

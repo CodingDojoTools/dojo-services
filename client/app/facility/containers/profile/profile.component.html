@@ -1,0 +1,4 @@
+<section class='profile'>
+  <app-user-form [user]='(user$ | async)' [locations]='(locations$ | async)' (update)='onUpdate($event)'>
+  </app-user-form>
+</section>

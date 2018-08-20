@@ -5,12 +5,22 @@
 - [Node](https://nodejs.org/en/)
 - [Redis](https://redis.io/download)
 
+## Editor Plugins
+
+- EditorConfig
+- Prettier
+- TSLint
+
 ## Installation
 
 Install project dependencies
 `yarn install`
 
-Rename `.env.example` to `.env` and fill in the appropriate details.
+Copy `.env.example` to `.env` and fill in the appropriate details.
+
+## Database Seed
+
+`yarn seed`
 
 ## Start
 
@@ -27,7 +37,7 @@ Add files...
 `git add -A` per usual
 
 then...  
-`yarn run commit`
+`yarn commit`
 
 Follow the prompts answering the questions.
 

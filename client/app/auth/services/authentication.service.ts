@@ -6,8 +6,8 @@ import {
   SocialUser,
 } from 'angularx-social-login';
 
-import { switchMap, tap } from 'rxjs/operators';
-import { Observable, from, BehaviorSubject } from 'rxjs';
+import { Observable, from } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { API } from '@shared/config';
 import { User } from '@auth/models';

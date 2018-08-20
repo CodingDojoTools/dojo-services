@@ -8,7 +8,8 @@ import * as fromActions from '../actions';
 import * as fromRoot from '@app/store';
 
 import { AuthenticationService } from '@auth/services';
-import { User } from '@auth/models';
+import { LoggedUser } from '@auth/models';
+import { debug } from '@app/utils';
 
 @Injectable()
 export class AuthEffects {
@@ -26,7 +27,23 @@ export class AuthEffects {
   @Effect()
   loginSuccess$ = this.actions$.pipe(
     ofType(fromActions.AuthActionTypes.LoginSuccess),
-    map(() => new fromRoot.Go({ path: ['/'] }))
+    map((action: fromActions.LoginSuccess) => action.payload),
+    tap(logged =>
+      debug(
+        `Successfully logged in ${logged.user.firstName} ${
+          logged.user.lastName
+        }. First login? ${logged.isNew}`,
+        logged
+      )
+    ),
+    // map(
+    //   (logged: LoggedUser) =>
+    //     logged.isNew ? `/facilities/users/${logged.user._id}/profile` : '/'
+    // ),
+    map(logged => `/facilities/users/${logged.user._id}/profile`),
+    tap(path => debug(`Path after logging in is ${path}`)),
+    map(path => new fromRoot.Go({ path: [path] })),
+    catchError(error => of(new fromActions.LoginFailure(error)))
   );
 
   @Effect()
@@ -44,7 +61,7 @@ export class AuthEffects {
     map(action => action.payload),
     exhaustMap(socialUser =>
       this.authService.login(socialUser).pipe(
-        map((user: User) => new fromActions.LoginSuccess({ user })),
+        map((user: LoggedUser) => new fromActions.LoginSuccess(user)),
         catchError(error => of(new fromActions.LoginFailure(error)))
       )
     )

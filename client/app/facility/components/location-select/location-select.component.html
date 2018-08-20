@@ -1,0 +1,8 @@
+<mat-form-field [formGroup]='parent' class='form-group'>
+  <mat-select class='form-control' placeholder="Location" formControlName="location" name="location">
+    <mat-option *ngFor="let location of locations | indifferentSort:'city'" [value]="location._id">
+      {{location.city}}
+    </mat-option>
+  </mat-select>
+
+</mat-form-field>

@@ -6,9 +6,5 @@ export function getIP(request: Request): string {
     request.headers['x-forwarded-for'] ||
     request.connection.remoteAddress;
 
-  if (Array.isArray(ip)) {
-    return ip[0];
-  }
-
-  return ip;
+  return Array.isArray(ip) ? ip[0] : ip;
 }

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { Document, Model } from 'mongoose';
 import { CRUD } from '../interfaces';
 
-export default abstract class BaseController implements CRUD {
+export abstract class BaseController implements CRUD {
   constructor(private model: Model<Document>) {}
 
   async index(_request: Request, response: Response) {
@@ -17,9 +17,13 @@ export default abstract class BaseController implements CRUD {
   async update(request: Request, response: Response) {
     response.json(
       await this.model
-        .findByIdAndUpdate(request.params[this.param], request.body, {
-          new: true,
-        })
+        .findByIdAndUpdate(
+          request.params[this.param],
+          { $set: request.body },
+          {
+            new: true,
+          }
+        )
         .lean()
     );
   }
@@ -30,8 +34,11 @@ export default abstract class BaseController implements CRUD {
   }
 
   get param() {
-    const name = this.constructor.name;
-    const controller = /^(\S+)Controller$/.exec(name)[1];
-    return `${controller.toLowerCase()}_id`;
+    return (
+      this.constructor.name
+        .replace(/Controller$/, '')
+        .replace(/(?<=.)([A-Z])/g, char => `_${char}`)
+        .toLowerCase() + '_id'
+    );
   }
 }

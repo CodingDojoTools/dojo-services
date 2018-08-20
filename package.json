@@ -8,6 +8,7 @@
     "build": "ng build",
     "build:watch": "ng build --watch",
     "build:prod": "ng build --production",
+    "seed": "ts-node -r tsconfig-paths/register seeds/index.ts",
     "tsc": "./node_modules/.bin/tsc",
     "test": "ng test",
     "lint": "ng lint",

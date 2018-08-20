@@ -7,6 +7,7 @@
     "paths": {
       "@app/*": ["client/app/*"],
       "@auth/*": ["client/app/auth/*"],
+      "@facility/*": ["client/app/facility/*"],
       "@env/*": ["client/environments/*"],
       "@server/*": ["server/*"],
       "@shared/*": ["shared/*"]

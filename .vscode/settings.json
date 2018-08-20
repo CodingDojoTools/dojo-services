@@ -1,0 +1,17 @@
+{
+  "editor.renderWhitespace": "all",
+  "vsicons.projectDetection.autoReload": true,
+  "extensions.ignoreRecommendations": true,
+  "vsicons.dontShowNewVersionMessage": true,
+  "editor.formatOnType": true,
+  "editor.formatOnSave": true,
+  "html.format.endWithNewline": true,
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": false
+  },
+  "prettier.requireConfig": true,
+  "workbench.iconTheme": "vscode-icons",
+  "editor.tabSize": 2
+}
