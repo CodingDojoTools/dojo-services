@@ -3,7 +3,7 @@ import { Document, Model } from 'mongoose';
 import { CRUD } from '../interfaces';
 
 export abstract class BaseController implements CRUD {
-  constructor(private model: Model<Document>) {}
+  constructor(protected model: Model<Document>) {}
 
   async index(_request: Request, response: Response) {
     response.json(await this.model.find({}).lean());

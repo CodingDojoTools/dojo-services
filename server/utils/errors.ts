@@ -15,3 +15,11 @@ export class TokenError extends UnAuthorizedError {
 export class BadRequestError extends BaseError {
   readonly code = 400;
 }
+
+export class ServerError extends BaseError {
+  readonly code = 500;
+}
+
+export class NotFoundError extends BaseError {
+  readonly code = 404;
+}

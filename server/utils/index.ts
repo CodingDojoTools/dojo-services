@@ -5,3 +5,4 @@ export * from './google-verify';
 export * from './helpers';
 export * from './ip-address';
 export * from './normalize-port';
+export * from './token';

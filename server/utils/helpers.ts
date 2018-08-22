@@ -45,6 +45,29 @@ export function flatten<T>(arrays: (T | T[])[], results: T[] = []): T[] {
  * @param {T} object
  * @returns {boolean}
  */
-export function inObject<T extends object>(field: string, object: T): boolean {
+export function inObject<T extends object, K extends keyof T>(
+  field: K,
+  object: T
+): boolean {
   return field in object;
+}
+
+export function isObject(value: any): value is object {
+  return value && isType('object', value) && Array.isArray(value) === false;
+}
+
+export function isString(value: any): value is string {
+  return isType('string', value);
+}
+
+export function isNumber(value: any): value is number {
+  return isType('number', value) && isNaN(value) === false;
+}
+
+export function isUndefined(value: any): value is undefined {
+  return isType('undefined', value);
+}
+
+export function isType(type: string, value: any): boolean {
+  return typeof value === type;
 }
