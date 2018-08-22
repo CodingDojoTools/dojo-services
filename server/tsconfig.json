@@ -3,6 +3,8 @@
   "compilerOptions": {
     "outDir": "../dist/server",
     "module": "commonjs",
+    "target": "esnext",
+    "lib": ["esnext"],
     "paths": {
       // ts-node path resolution issues, do not use
       "@client/*": ["../client/*"],

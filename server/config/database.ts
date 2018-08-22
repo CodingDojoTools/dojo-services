@@ -1,9 +1,10 @@
 import * as uniqueValidator from 'mongoose-unique-validator';
+import * as mongoose from 'mongoose';
+import { inspect } from 'util';
+
 import { uri, options } from './dboptions';
 import { PRODUCTION } from './production';
-import * as mongoose from 'mongoose';
 import { debug } from '../utils';
-import { inspect } from 'util';
 
 export const dbConnection = mongoose.connect(
   uri,
@@ -25,7 +26,7 @@ if (!PRODUCTION) {
   *  If the connection throws an error
   */
   mongoose.connection.on('error', err => {
-    console.error(`Mongoose default connection error: ${err}`);
+    debug(`Mongoose default connection error: ${err}`);
 
     process.exit(0);
   });

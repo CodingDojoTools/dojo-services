@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AuthGuard } from '@auth/guards';
+
 import * as fromContainers from './containers';
 import * as fromGuards from './guards';
 

@@ -13,6 +13,7 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: AuthActions): State {
   switch (action.type) {
+    case AuthActionTypes.CurrentUserSuccess:
     case AuthActionTypes.LoginSuccess: {
       return {
         ...state,
@@ -20,8 +21,9 @@ export function reducer(state = initialState, action: AuthActions): State {
       };
     }
 
+    case AuthActionTypes.LogoutFailure:
     case AuthActionTypes.LoginFailure:
-    case AuthActionTypes.Logout: {
+    case AuthActionTypes.LogoutSuccess: {
       return initialState;
     }
 

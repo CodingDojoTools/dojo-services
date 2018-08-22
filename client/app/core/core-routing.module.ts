@@ -3,12 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { environment } from '@env/environment';
 
-import { DashboardModule } from '@app/dashboard';
 import { AuthGuard } from '@auth/guards';
 
 import * as fromContainers from './containers';
 
-const enableTracing = false && !environment.production;
+const enableTracing = true && !environment.production;
 
 const routes: Routes = [
   {
@@ -19,7 +18,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     canActivate: [AuthGuard],
-    loadChildren: () => DashboardModule,
+    loadChildren: '@app/dashboard/dashboard.module#DashboardModule',
   },
   {
     path: 'facilities',

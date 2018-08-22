@@ -38,6 +38,7 @@ const userSchema = new Schema(
 );
 
 export interface IUser extends Document {
+  _id: string | any;
   firstName: string;
   lastName: string;
   email: string;
@@ -49,6 +50,14 @@ export interface IUser extends Document {
   photoUrl: string;
   location: string;
 }
+
+userSchema.pre('save', function(next) {
+  if (this.isNew) {
+    (this as IUser).lastSignIn = new Date();
+  }
+  next();
+});
+
 export interface UserModel extends Model<IUser> {}
 
 export const User: UserModel = model<IUser>('User', userSchema);

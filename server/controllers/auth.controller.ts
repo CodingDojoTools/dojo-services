@@ -1,9 +1,20 @@
-import { Identity, User, IUser, IIdentity } from '../models';
 import { Request, Response } from 'express';
-import { SocialUser, UserIP, TokenPayload } from '../interfaces';
-import { GoogleAuthHelper, AuthHelper, getIP, debug } from '../utils';
+import { SocialUser } from '../interfaces';
+import { CreateUpdateUserHelper } from './helpers';
+import { IUser, UserModel, User } from '../models';
+import { tokenOptions } from '../config';
+
+import {
+  GoogleAuthHelper,
+  AuthHelper,
+  debug,
+  getIP,
+  signToken,
+} from '../utils';
 
 class AuthController {
+  constructor(private readonly model: UserModel) {}
+
   async googleSignIn(request: Request, response: Response): Promise<any> {
     const { body: userData }: { body: SocialUser } = request;
 
@@ -26,92 +37,59 @@ class AuthController {
     /**
      * @todo
      * setup session
-     * create token
      */
 
     debug(
       `Successfully logged in ${user.firstName}. First visit? ${user.isNew}`
     );
 
+    this.setToken(
+      response,
+      await signToken(
+        this.createTokenPayload(user),
+        request.app.get('token_secret'),
+        tokenOptions
+      )
+    );
+
     response.json({ user, isNew: user.isNew });
   }
 
-  logout() {
-    // invalidate token
-  }
-}
-
-/**
- * meh..
- *
- * @class CreateUpdateUserHelper
- */
-class CreateUpdateUserHelper {
-  private readonly identity = Identity;
-  private readonly user = User;
-  constructor(
-    private readonly provider: GoogleAuthHelper,
-    private readonly userData: UserIP
-  ) {}
-
-  async getUser(): Promise<IUser> {
-    const [identity, user] = await this.populate();
-
-    if (user && identity) {
-      return await this.updateUser(user, this.userData.lastIpAddress);
-    }
-    return await this.createUserAndIdentity();
-  }
-
-  private async populate(): Promise<[IIdentity, IUser]> {
-    return await Promise.all([
-      this.findIdentity(this.provider.provider, this.provider.payload.sub),
-      this.findUser(this.userData.email || this.provider.payload.email),
-    ]);
-  }
-
-  private async findIdentity(provider: string, providerId: string) {
-    return await this.identity.findOne({ provider, providerId });
-  }
-
-  private async findUser(email: string) {
-    return await this.user.findOne({ email }).lean();
-  }
-
-  private async createUserAndIdentity(): Promise<IUser> {
-    const user = await this.createUser(this.userData);
-    await this.createIdentity(this.provider.payload, user._id);
-    return user;
-  }
-
-  private async createUser(userData: SocialUser): Promise<IUser> {
-    const user = new this.user({ ...userData, lastSignIn: Date.now() });
-    const { isNew } = user;
-
-    await user.save();
-
-    return { ...user.toObject(), isNew };
-  }
-
-  private async createIdentity(
-    payload: TokenPayload,
-    user: string
-  ): Promise<IIdentity> {
-    return await this.identity.create({
-      ...payload,
-      user,
-      provider: this.provider.provider,
-      providerId: payload.sub,
-    });
-  }
-
-  private async updateUser(user: IUser, lastIpAddress: string): Promise<IUser> {
-    return await this.user.findByIdAndUpdate(
-      user._id,
-      { $set: { lastIpAddress, lastSignIn: Date.now() } },
-      { new: true }
+  async logout(request: Request, response: Response) {
+    this.setToken(
+      response,
+      await signToken(
+        {
+          _id: request.user._id,
+        },
+        request.app.get('token_secret'),
+        {
+          expiresIn: 1,
+        }
+      )
     );
+
+    response.json(request.user);
+  }
+
+  async loggedInUser(request: Request, response: Response) {
+    const user = await this.model.findById(request.user._id).lean();
+
+    response.json(user);
+  }
+
+  private setToken(response: Response, token: string): void {
+    response.set('authorization', `Bearer ${token}`);
+  }
+
+  private createTokenPayload(user: IUser) {
+    /**
+     * @todo
+     * attach user roles/permissions
+     */
+
+    return { _id: user._id };
   }
 }
 
-export const authController = new AuthController();
+export const authController = new AuthController(User);
