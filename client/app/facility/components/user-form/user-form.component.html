@@ -1,17 +1,9 @@
-<section>
+<section class='col'>
   <form (ngSubmit)='onSubmit(form)' [formGroup]="form" class='form-container' novalidate>
-    <mat-form-field class='form-group' class='form-group'>
-      <input class='form-control mat-input-underline' type='text' placeholder="First Name" matInput formControlName="firstName">
-    </mat-form-field>
 
-    <mat-form-field class='form-group'>
-      <input class='form-control mat-input-underline' type='text' placeholder="Last Name" matInput formControlName="lastName">
-    </mat-form-field>
-
-    <mat-form-field class='form-group'>
-      <input class='form-control mat-input-underline' type='text' placeholder="Email" readonly aria-readonly='true' matInput formControlName="email">
-    </mat-form-field>
-
+    <app-form-text [parent]='form' placeholder='First Name' controlName='firstName'></app-form-text>
+    <app-form-text [parent]='form' placeholder='Last Name' controlName='lastName'></app-form-text>
+    <app-form-text [parent]='form' placeholder='Email' controlName='email' [readonly]='true'></app-form-text>
     <app-location-select [parent]='form' [locations]='locations'></app-location-select>
 
     <button mat-raised-button>Submit</button>

@@ -38,3 +38,9 @@ export const getSelectedUser = createSelector(
   (entities, router): User =>
     router.state && entities[router.state.params.user_id]
 );
+
+export const getSelectedUsers = createSelector(
+  getUserEntities,
+  fromUsers.getSelectedUsers,
+  (users, selected) => selected.map(id => users[id])
+);

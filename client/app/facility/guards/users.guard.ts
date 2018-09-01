@@ -2,8 +2,8 @@ import { Injectable, Inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { StoreEntitiesGuard } from '@app/core';
 
-import * as fromInjector from '../injectors';
-import * as fromStore from '../store';
+import * as fromInjector from '@facility/injectors';
+import * as fromStore from '@facility/store';
 
 @Injectable({
   providedIn: 'root',

@@ -4,12 +4,15 @@ import { Seeder } from './seeder.seed';
 const locations = [
   {
     city: 'Online',
+    alias: 'WorldWide',
   },
   {
     city: 'Bellevue',
+    alias: 'Seattle',
   },
   {
     city: 'San Jose',
+    alias: 'Silicon Valley',
   },
   {
     city: 'Tulsa',
@@ -19,15 +22,18 @@ const locations = [
   },
   {
     city: 'Tysons Corner',
+    alias: 'N.O.V.A.',
   },
   {
-    city: 'East Bay',
+    city: 'Berkeley',
+    alias: 'East Bay',
   },
   {
     city: 'Dallas',
   },
   {
     city: 'Burbank',
+    alias: 'Los Angeles',
   },
 ];
 

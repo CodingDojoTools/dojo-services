@@ -14,10 +14,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "foreman": "./node_modules/.bin/nf"
+    "foreman": "nf"
   },
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "@angular/animations": "^6.0.3",
     "@angular/cdk": "^6.4.1",

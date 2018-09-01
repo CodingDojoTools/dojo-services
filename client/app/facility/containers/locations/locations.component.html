@@ -1,0 +1,6 @@
+<section>
+  <div class='locations-container' *ngFor='let location of locations$ | async | indifferentSort:"city"'>
+    <app-location-card [location]='location'>
+    </app-location-card>
+  </div>
+</section>

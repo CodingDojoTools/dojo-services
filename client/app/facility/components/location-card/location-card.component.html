@@ -1,0 +1,25 @@
+<mat-card class='space'>
+  <mat-card-content>
+    <h4 class='text-center' [routerLink]='location._id' [textOnHover]='location.alias'>{{ location.city | titleize }}</h4>
+
+    <div class="col-md">
+      <div class="address">
+        Address:
+        <p>{{ (location.address | titleize) || 'N/A' }}</p>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="employees">
+        Employees:
+        <p>{{ location.employees.length }}</p>
+      </div>
+    </div>
+
+    <div class="phone">
+      Phone:
+      <p>{{ location.phone || 'N/A' }}</p>
+    </div>
+
+
+  </mat-card-content>
+</mat-card>

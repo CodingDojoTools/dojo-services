@@ -4,7 +4,7 @@ import { cold } from 'jasmine-marbles';
 
 import { AuthGuard } from './auth.guard';
 import * as AuthActions from '../store/actions';
-import * as fromRoot from '../../reducers';
+import * as fromRoot from '../../store';
 import * as fromAuth from '../store/reducers';
 
 describe('Auth Guard', () => {

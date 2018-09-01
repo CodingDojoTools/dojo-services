@@ -8,14 +8,14 @@ stackVariantRouter
   .get('/', wrapper(stackVariantController.index, stackVariantController))
   .post('/', wrapper(stackVariantController.create, stackVariantController))
   .get(
-    '/:location_variant_id',
+    '/:stack_variant_id',
     wrapper(stackVariantController.show, stackVariantController)
   )
   .put(
-    '/:location_variant_id',
+    '/:stack_variant_id',
     wrapper(stackVariantController.update, stackVariantController)
   )
   .delete(
-    '/:location_variant_id',
+    '/:stack_variant_id',
     wrapper(stackVariantController.destroy, stackVariantController)
   );

@@ -1,6 +1,5 @@
 <mat-sidenav-container *ngIf='loggedIn' class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="'dialog'" mode="side" [opened]="false">
     <mat-toolbar color="primary">
 
     </mat-toolbar>
@@ -9,7 +8,7 @@
         <a mat-list-item routerLink="/facilities/users">Users</a>
       </div>
       <div>
-        <a mat-list-item href="#">Link 2</a>
+        <a mat-list-item routerLink="/facilities/locations">Locations</a>
       </div>
       <div>
         <a mat-list-item href="#">Link 3</a>
@@ -18,7 +17,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span routerLink='/dashboard'>Dojo Services</span>

@@ -1,6 +1,5 @@
-<app-navigation [loggedIn]='loggedIn$ | async' (logout)='onLogout()'></app-navigation>
-
 <main class="container">
+  <app-navigation [loggedIn]='loggedIn$ | async' (logout)='onLogout()'></app-navigation>
   <router-outlet>
   </router-outlet>
 </main>

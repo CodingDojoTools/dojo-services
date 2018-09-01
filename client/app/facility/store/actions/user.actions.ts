@@ -1,7 +1,7 @@
 import { Update } from '@ngrx/entity';
 import { Action } from '@ngrx/store';
 
-import { User } from '@app/auth/models';
+import { User } from '@auth/models';
 
 export enum UserActionTypes {
   LoadUsers = '[Facilities] Loading Users',
@@ -19,6 +19,8 @@ export enum UserActionTypes {
   RemoveUser = '[Facilities] Removing User',
   RemoveUserSuccess = '[Facilities] Removing User Success',
   RemoveUserFail = '[Facilities] Removing User Fail',
+
+  SelectUsers = '[Facilities] Select Users',
 
   ClearUsers = '[Facilities] Clear Users',
 }
@@ -91,6 +93,12 @@ export class UsersClear implements Action {
   readonly type = UserActionTypes.ClearUsers;
 }
 
+export class SelectUsers implements Action {
+  readonly type = UserActionTypes.SelectUsers;
+
+  constructor(readonly payload: string[]) {}
+}
+
 export type UserActions =
   | UsersClear
   | UsersLoad
@@ -103,4 +111,5 @@ export type UserActions =
   | UserRemoveSuccess
   | UserUpdate
   | UserUpdateFail
-  | UserUpdateSuccess;
+  | UserUpdateSuccess
+  | SelectUsers;

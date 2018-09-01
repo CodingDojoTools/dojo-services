@@ -4,20 +4,27 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'indifferentSort',
 })
 export class IndifferentSortPipe<T extends object> implements PipeTransform {
-  transform(contents: T[], field?: string, order = 1): T[] {
+  transform(contents: T[], field?: string | number, order = 1): T[] {
     if (!Array.isArray(contents) || contents.length === 0) {
       return contents;
     }
 
-    if (typeof field !== 'string') {
-      field = this.setField(contents[0]);
+    if (typeof field === 'number') {
+      order = field;
+      field = null;
     }
 
-    return contents.sort((a, b) => this.sort(a, b, field, order));
+    const property = this.setField(contents[0], field);
+
+    return contents.sort((a, b) => this.sort(a, b, property, order));
   }
 
-  private setField(content: T): string {
-    return Object.keys(content).shift();
+  private setField(content: T, field?: any): string {
+    if (typeof field !== 'string') {
+      return Object.keys(content).shift();
+    }
+
+    return field;
   }
 
   private sort(a: T, b: T, field: string, order: number): number {

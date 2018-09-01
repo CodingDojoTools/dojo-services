@@ -34,6 +34,21 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'locations',
+    children: [
+      {
+        path: '',
+        component: fromContainers.LocationsComponent,
+        canActivate: [fromGuards.LocationsGuard],
+      },
+      {
+        path: ':location_id',
+        component: fromContainers.LocationComponent,
+        canActivate: [fromGuards.LocationExistsGuard],
+      },
+    ],
+  },
 ];
 
 @NgModule({

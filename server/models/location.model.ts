@@ -1,4 +1,5 @@
 import { model, Schema, Document, Model } from 'mongoose';
+import { PHONE_REGEXP } from '../utils';
 
 const { ObjectId } = Schema.Types;
 
@@ -9,10 +10,28 @@ const locationSchema = new Schema({
     type: String,
     unique: true,
   },
+  alias: {
+    type: String,
+    trim: true,
+    default: '',
+  },
   address: {
     type: String,
     trim: true,
     default: '',
+  },
+  phone: {
+    type: String,
+    trim: true,
+    match: PHONE_REGEXP,
+    default: '',
+  },
+  image: {
+    data: Buffer,
+    contentType: {
+      type: String,
+      trim: true,
+    },
   },
   stacks: [
     {
@@ -29,8 +48,14 @@ const locationSchema = new Schema({
 });
 
 export interface ILocation extends Document {
+  alias: string;
   city: string;
   address: string;
+  image?: {
+    data: Buffer;
+    contentType: string;
+  };
+  phone: string;
   stacks: string[];
   employees: string[];
 }
