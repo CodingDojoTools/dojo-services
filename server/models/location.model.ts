@@ -1,5 +1,6 @@
 import { model, Schema, Document, Model } from 'mongoose';
 import { PHONE_REGEXP } from '../utils';
+import { ImageBuffer } from '../interfaces';
 
 const { ObjectId } = Schema.Types;
 
@@ -51,10 +52,7 @@ export interface ILocation extends Document {
   alias: string;
   city: string;
   address: string;
-  image?: {
-    data: Buffer;
-    contentType: string;
-  };
+  image?: ImageBuffer;
   phone: string;
   stacks: string[];
   employees: string[];

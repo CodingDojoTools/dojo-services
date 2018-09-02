@@ -27,19 +27,18 @@ export class LocationComponent implements OnInit {
     this.location$ = this.store.pipe(
       select(fromStore.getSelectedLocation),
       tap((location = null) => {
-        const locationExists: boolean =
-          location && Array.isArray(location.employees);
+        const locationExists = location && Array.isArray(location.employees);
 
         const employees = locationExists ? location.employees : [];
         const stacks = locationExists ? location.stacks : [];
 
-        this.store.dispatch(new fromStore.SelectUsers(employees));
+        this.store.dispatch(new fromStore.UsersSelect(employees));
         // this.store.dispatch(new fromStore.SelectStacks(stacks));
       })
     );
 
     this.users$ = this.store.pipe(select(fromStore.getUsers));
-    this.employees$ = this.store.pipe(select(fromStore.getSelectedUsers));
+    this.employees$ = this.store.pipe(select(fromStore.getSelectUsers));
     // this.stacks$ = this.store.pipe(select(fromStore.getStacks));
     // this.selectedStacks$ = this.store.pipe(select(fromStore.getSelectedStacks));
   }

@@ -26,6 +26,11 @@ export const getUsersLoaded = createSelector(
   fromUsers.getUsersLoaded
 );
 
+export const getSelectedUsers = createSelector(
+  getUserState,
+  fromUsers.getSelectedUsers
+);
+
 export const getUsersIds = createSelector(getUserState, fromUsers.getUsersIds);
 
 export const getUsers = createSelector(getUserEntities, entities =>
@@ -39,8 +44,8 @@ export const getSelectedUser = createSelector(
     router.state && entities[router.state.params.user_id]
 );
 
-export const getSelectedUsers = createSelector(
+export const getSelectUsers = createSelector(
   getUserEntities,
-  fromUsers.getSelectedUsers,
-  (users, selected) => selected.map(id => users[id])
+  getSelectedUsers,
+  (users, selected): User[] => selected.map(id => users[id])
 );

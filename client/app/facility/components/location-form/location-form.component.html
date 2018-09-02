@@ -1,6 +1,8 @@
-<section class="col">
+<section class="col-md">
   <form class="form form-container" [formGroup]="form" novalidate>
-    <app-form-text [parent]='form' [placeholder]='City' controlName='city'></app-form-text>
-    <app-form-text [parent]='form' [placeholder]='Address' controlName='address'></app-form-text>
+    <app-form-text [parent]='form' placeholder='City' controlName='city'></app-form-text>
+    <app-form-text [parent]='form' placeholder='Address' controlName='address'></app-form-text>
+    <app-form-text [parent]='form' placeholder='Alias' controlName='alias'></app-form-text>
+    <app-form-text [parent]='form' placeholder='Phone Number' controlName='phone' [match]='match'></app-form-text>
   </form>
 </section>

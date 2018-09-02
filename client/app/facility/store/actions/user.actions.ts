@@ -93,7 +93,7 @@ export class UsersClear implements Action {
   readonly type = UserActionTypes.ClearUsers;
 }
 
-export class SelectUsers implements Action {
+export class UsersSelect implements Action {
   readonly type = UserActionTypes.SelectUsers;
 
   constructor(readonly payload: string[]) {}
@@ -112,4 +112,4 @@ export type UserActions =
   | UserUpdate
   | UserUpdateFail
   | UserUpdateSuccess
-  | SelectUsers;
+  | UsersSelect;

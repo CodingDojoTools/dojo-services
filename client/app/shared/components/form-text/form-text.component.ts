@@ -20,6 +20,9 @@ export class FormTextComponent {
   @Input()
   readonly = false;
 
+  @Input()
+  match = '.*';
+
   get control(): FormControl {
     return this.parent.get(this.controlName) as FormControl;
   }
@@ -42,6 +45,10 @@ export class FormTextComponent {
 
   get length() {
     return this.control.getError('minlength');
+  }
+
+  get pattern() {
+    return this.hasError('pattern');
   }
 
   hasError(error: string): boolean {

@@ -24,5 +24,7 @@
       <button mat-raised-button color="secondary" (click)='onClick()'>Logout</button>
     </mat-toolbar>
     <!-- Add Content Here -->
+
+    <ng-content select='router-outlet'></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

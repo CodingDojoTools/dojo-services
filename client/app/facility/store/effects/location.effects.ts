@@ -5,8 +5,21 @@ import { of } from 'rxjs';
 
 import { Location } from '@facility/models';
 import { LocationService } from '@facility/services';
-import { LocationActionTypes } from '../actions';
-import * as fromActions from '../actions';
+
+import {
+  LocationActionTypes,
+  LocationsLoadSuccess,
+  LocationsLoadFail,
+  LocationCreate,
+  LocationCreateFail,
+  LocationCreateSuccess,
+  LocationUpdate,
+  LocationUpdateFail,
+  LocationUpdateSuccess,
+  LocationRemove,
+  LocationRemoveFail,
+  LocationRemoveSuccess,
+} from '@facility/store/actions';
 
 @Injectable()
 export class LocationEffects {
@@ -15,8 +28,8 @@ export class LocationEffects {
     ofType(LocationActionTypes.LoadLocations),
     switchMap(() =>
       this.locationService.index().pipe(
-        map(locations => new fromActions.LocationsLoadSuccess(locations)),
-        catchError(error => of(new fromActions.LocationsLoadFail(error)))
+        map(locations => new LocationsLoadSuccess(locations)),
+        catchError(error => of(new LocationsLoadFail(error)))
       )
     )
   );
@@ -24,11 +37,11 @@ export class LocationEffects {
   @Effect()
   createLocation$ = this.actions$.pipe(
     ofType(LocationActionTypes.CreateLocation),
-    map((action: fromActions.LocationCreate) => action.payload),
+    map((action: LocationCreate) => action.payload),
     switchMap((create: Location) =>
       this.locationService.create(create).pipe(
-        map(location => new fromActions.LocationCreateSuccess(location)),
-        catchError(error => of(new fromActions.LocationCreateFail(error)))
+        map(location => new LocationCreateSuccess(location)),
+        catchError(error => of(new LocationCreateFail(error)))
       )
     )
   );
@@ -36,17 +49,17 @@ export class LocationEffects {
   @Effect()
   updateLocation$ = this.actions$.pipe(
     ofType(LocationActionTypes.UpdateLocation),
-    map((action: fromActions.LocationUpdate) => action.payload),
+    map((action: LocationUpdate) => action.payload),
     switchMap(update =>
       this.locationService.update(update).pipe(
         map(
           location =>
-            new fromActions.LocationUpdateSuccess({
+            new LocationUpdateSuccess({
               id: location._id,
               changes: location,
             })
         ),
-        catchError(error => of(new fromActions.LocationCreateFail(error)))
+        catchError(error => of(new LocationUpdateFail(error)))
       )
     )
   );
@@ -54,11 +67,11 @@ export class LocationEffects {
   @Effect()
   removeLocation$ = this.actions$.pipe(
     ofType(LocationActionTypes.RemoveLocation),
-    map((action: fromActions.LocationRemove) => action.payload),
+    map((action: LocationRemove) => action.payload),
     switchMap(remove =>
       this.locationService.destroy(remove._id).pipe(
-        map(location => new fromActions.LocationRemoveSuccess(location)),
-        catchError(error => of(new fromActions.LocationRemoveFail(error)))
+        map(location => new LocationRemoveSuccess(location)),
+        catchError(error => of(new LocationRemoveFail(error)))
       )
     )
   );

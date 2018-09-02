@@ -43,6 +43,10 @@ const routes: Routes = [
         canActivate: [fromGuards.LocationsGuard],
       },
       {
+        path: 'new',
+        component: fromContainers.LocationComponent,
+      },
+      {
         path: ':location_id',
         component: fromContainers.LocationComponent,
         canActivate: [fromGuards.LocationExistsGuard],

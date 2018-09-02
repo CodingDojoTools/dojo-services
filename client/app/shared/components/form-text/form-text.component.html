@@ -1,6 +1,6 @@
 <mat-form-field class="form-group" [formGroup]='parent'>
   <input class='form-control mat-input-underline' type='text' [placeholder]="placeholder" matInput [formControlName]="controlName"
-    [readonly]='readonly'>
+    [pattern]='match' [readonly]='readonly'>
 
   <mat-error *ngIf='required'>
     You must provide {{ format() }}
@@ -8,5 +8,9 @@
 
   <mat-error *ngIf='minLength'>
     {{ format() | capitalize }} must be at least {{ length.requiredLength }} characters
+  </mat-error>
+
+  <mat-error *ngIf='pattern'>
+    Supplied characters are not allowed or pattern fails to match
   </mat-error>
 </mat-form-field>
