@@ -13,6 +13,7 @@ if (PRODUCTION && (isUndefined(TOKEN_SECRET) || TOKEN_SECRET === devSecret)) {
 
 export const jwtOptions: Options = {
   secret: TOKEN_SECRET,
+  requestProperty: 'token',
 };
 /**
  *  algorithm?: string;

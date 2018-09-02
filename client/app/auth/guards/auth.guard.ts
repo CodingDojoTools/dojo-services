@@ -1,4 +1,4 @@
-import { CanActivate, CanLoad } from '@angular/router';
+import { CanActivate, CanLoad, CanActivateChild } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 
@@ -9,7 +9,7 @@ import * as fromStore from '@auth/store';
 import * as fromRoot from '@app/store';
 
 @Injectable()
-export class AuthGuard implements CanActivate, CanLoad {
+export class AuthGuard implements CanActivate, CanLoad, CanActivateChild {
   constructor(private store: Store<fromStore.State>) {}
 
   canActivate(): Observable<boolean> {
@@ -34,6 +34,10 @@ export class AuthGuard implements CanActivate, CanLoad {
   }
 
   canLoad(): Observable<boolean> {
+    return this.canActivate();
+  }
+
+  canActivateChild(): Observable<boolean> {
     return this.canActivate();
   }
 }

@@ -36,6 +36,10 @@ export function flatten<T>(arrays: (T | T[])[], results: T[] = []): T[] {
   return results;
 }
 
+export function not(value: any): boolean {
+  return !value;
+}
+
 /**
  *
  *
@@ -53,7 +57,7 @@ export function inObject<T extends object, K extends keyof T>(
 }
 
 export function isObject(value: any): value is object {
-  return value && isType('object', value) && Array.isArray(value) === false;
+  return value && isType('object', value) && not(Array.isArray(value));
 }
 
 export function isString(value: any): value is string {
@@ -61,7 +65,7 @@ export function isString(value: any): value is string {
 }
 
 export function isNumber(value: any): value is number {
-  return isType('number', value) && isNaN(value) === false;
+  return isType('number', value) && not(isNaN(value));
 }
 
 export function isUndefined(value: any): value is undefined {

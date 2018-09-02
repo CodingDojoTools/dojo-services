@@ -3,7 +3,7 @@ import { Directive, Input, HostBinding, OnInit } from '@angular/core';
 import { ImageBuffer } from '@app/core';
 
 @Directive({
-  selector: '[appBinaryToImage]',
+  selector: '[binaryToImage]',
 })
 export class BinaryToImageDirective implements OnInit {
   @HostBinding('src')

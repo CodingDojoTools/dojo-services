@@ -1,3 +1,4 @@
+export * from './exam.model';
 export * from './identity.model';
 export * from './location.model';
 export * from './stack.model';

@@ -9,9 +9,8 @@ import {
 } from 'angularx-social-login';
 
 import { Observable, from } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
-import { API } from '@shared/config';
+import { API } from '@app/config';
 import { User } from '@auth/models';
 
 @Injectable({

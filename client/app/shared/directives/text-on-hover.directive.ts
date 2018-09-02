@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 
 @Directive({
-  // tslint:disable-next-line
   selector: '[textOnHover]',
 })
 export class TextOnHoverDirective implements AfterViewInit {

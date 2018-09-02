@@ -9,6 +9,7 @@ import * as fromGuards from './guards';
 const routes: Routes = [
   {
     path: 'users',
+    canActivateChild: [AuthGuard],
     children: [
       {
         path: '',
@@ -34,8 +35,10 @@ const routes: Routes = [
       },
     ],
   },
+
   {
     path: 'locations',
+    canActivateChild: [AuthGuard],
     children: [
       {
         path: '',
@@ -50,6 +53,51 @@ const routes: Routes = [
         path: ':location_id',
         component: fromContainers.LocationComponent,
         canActivate: [fromGuards.LocationExistsGuard],
+      },
+    ],
+  },
+
+  {
+    path: 'stacks',
+    canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: fromContainers.StacksComponent,
+        canActivate: [fromGuards.StacksGuard],
+      },
+      {
+        path: 'new',
+        component: fromContainers.StackComponent,
+      },
+      {
+        path: ':stack_id',
+        component: fromContainers.StackComponent,
+        canActivate: [fromGuards.StackExistsGuard],
+      },
+    ],
+  },
+
+  {
+    path: 'stack_variants',
+    canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: fromContainers.StackVariantsComponent,
+        canActivate: [fromGuards.StackVariantsGuard],
+      },
+      {
+        path: 'new',
+        component: fromContainers.StackVariantComponent,
+      },
+      {
+        path: ':stack_variant_id',
+        component: fromContainers.StackVariantComponent,
+        canActivate: [
+          fromGuards.StackVariantExistsGuard,
+          fromGuards.StacksGuard,
+        ],
       },
     ],
   },

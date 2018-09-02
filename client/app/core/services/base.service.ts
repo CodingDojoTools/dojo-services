@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Service, Resource } from '@app/core';
+import { API } from '@shared/config';
 import { debug } from '@app/utils';
-import { API } from '@app/config';
 
 @Injectable()
 export abstract class BaseService<T extends Resource> implements Service<T> {

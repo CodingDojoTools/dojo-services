@@ -1,5 +1,4 @@
-import { Request, Response } from 'express';
-import { SocialUser } from '../interfaces';
+import { SocialUser, Request, Response } from '../interfaces';
 import { CreateUpdateUserHelper } from './helpers';
 import { IUser, UserModel, User } from '../models';
 import { tokenOptions } from '../config';
@@ -60,7 +59,7 @@ class AuthController {
       response,
       await signToken(
         {
-          _id: request.user._id,
+          _id: request.token._id,
         },
         request.app.get('token_secret'),
         {
@@ -73,7 +72,7 @@ class AuthController {
   }
 
   async loggedInUser(request: Request, response: Response) {
-    const user = await this.model.findById(request.user._id).lean();
+    const user = await this.model.findById(request.token._id).lean();
 
     response.json(user);
   }

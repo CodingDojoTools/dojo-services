@@ -19,6 +19,7 @@ import { of } from 'rxjs';
 import * as fromActions from '../actions';
 import * as fromRoot from '@app/store';
 
+import { LocalStorageService } from '@app/core/services';
 import { AuthenticationService } from '@auth/services';
 import { LoggedUser } from '@auth/models';
 import { debug } from '@app/utils';
@@ -103,7 +104,7 @@ export class AuthEffects {
         catchError(error => of(new fromActions.LogoutFailure(error)))
       )
     ),
-    tap(() => localStorage.removeItem('access_token'))
+    tap(() => this.localStorageService.removeItem('access_token'))
   );
 
   @Effect()
@@ -142,7 +143,8 @@ export class AuthEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly store: Store<fromRoot.State>,
-    private readonly authService: AuthenticationService
+    private readonly authService: AuthenticationService,
+    private readonly localStorageService: LocalStorageService
   ) {}
 
   private returnUrl<T extends Action>(

@@ -1,6 +1,5 @@
-import { Request, Response } from 'express';
+import { CRUD, Request, Response } from '../interfaces';
 import { Document, Model } from 'mongoose';
-import { CRUD } from '../interfaces';
 
 export abstract class BaseController implements CRUD {
   constructor(protected model: Model<Document>) {}

@@ -1,7 +1,7 @@
 import { Directive, HostBinding, Input, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appPhoneNumberFormatter]',
+  selector: '[phoneNumberFormatter]',
 })
 export class PhoneNumberFormatterDirective {
   @HostBinding()

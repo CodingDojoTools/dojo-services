@@ -4,7 +4,7 @@ import { Injectable, Inject } from '@angular/core';
 
 import { StoreEntityExistsGuard } from '@app/core';
 
-import * as fromInjector from '../injectors';
+import * as fromInjectors from '../injectors';
 import * as fromStore from '../store';
 import { User } from '@auth/models';
 
@@ -23,7 +23,7 @@ export class UserExistsGuard
 
   constructor(
     protected readonly store: Store<fromStore.FacilitiesState>,
-    @Inject(fromInjector.USERS_LOAD)
+    @Inject(fromInjectors.USERS_LOAD)
     protected readonly loader: fromStore.UsersLoad
   ) {
     super(store, loader);

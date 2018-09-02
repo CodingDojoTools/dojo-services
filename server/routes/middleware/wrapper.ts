@@ -1,5 +1,10 @@
-import { Request, Response, NextFunction, RequestHandler } from 'express';
-import { Asyncable } from '../../interfaces';
+import {
+  Asyncable,
+  Request,
+  Response,
+  NextFunction,
+  RequestHandler,
+} from '../../interfaces';
 
 export function wrapper<T>(
   callback: Asyncable,
