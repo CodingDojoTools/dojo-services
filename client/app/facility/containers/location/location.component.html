@@ -1,5 +1,9 @@
-<section class="row location">
-  <app-location-form [location]='location$ | async' [employees]='employees$ | async' [users]='users$ | async'>
-
-  </app-location-form>
+<section class="container location">
+  <div class="row">
+    <div class="col">
+      <app-location-form [location]='location$ | async' [employees]='employees$ | async' [users]='users$ | async' [stacks]='stacks$ | async'
+        [selectedStacks]='selectedStacks$ | async'>
+      </app-location-form>
+    </div>
+  </div>
 </section>

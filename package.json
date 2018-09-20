@@ -40,6 +40,7 @@
     "@ngrx/router-store": "^6.1.0",
     "@ngrx/store": "^6.1.0",
     "@ngrx/store-devtools": "^6.1.0",
+    "@status/codes": "^1.0.0",
     "add": "^2.0.6",
     "angularx-social-login": "^1.2.3",
     "bluebird": "^3.5.1",

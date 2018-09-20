@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { API } from '../config';
+import { API } from '@server/config';
 import { authRouter } from './auth.routes';
 import { examRouter } from './exam.routes';
 import { locationRouter } from './location.routes';

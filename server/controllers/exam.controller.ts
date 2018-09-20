@@ -1,5 +1,5 @@
 import { BaseController } from './base.controller';
-import { ExamModel, Exam } from '../models';
+import { ExamModel, Exam } from '@server/models';
 
 class ExamController extends BaseController {
   constructor(model: ExamModel) {

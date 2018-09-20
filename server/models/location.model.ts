@@ -1,6 +1,6 @@
 import { model, Schema, Document, Model } from 'mongoose';
-import { PHONE_REGEXP } from '../utils';
-import { ImageBuffer } from '../interfaces';
+import { PHONE_REGEXP } from '@server/utils';
+import { ImageBuffer } from '@server/interfaces';
 
 const { ObjectId } = Schema.Types;
 

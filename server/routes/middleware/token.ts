@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { TokenError, verifyToken } from '../../utils';
-import { API, jwtOptions } from '../../config';
+import { TokenError, verifyToken } from '@server/utils';
+import { API, jwtOptions } from '@server/config';
 
 import * as jwt from 'express-jwt';
 

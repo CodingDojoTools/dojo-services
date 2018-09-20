@@ -3,6 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import * as fromStore from '@facility/store';
+import * as fromRoot from '@app/store';
 
 import { Location } from '@facility/models';
 

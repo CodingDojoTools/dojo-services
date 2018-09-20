@@ -1,3 +1,4 @@
+export * from '@shared/config';
 export * from './env';
 export * from './configuration';
 export * from './cors';
@@ -7,4 +8,3 @@ export * from './jwt';
 export * from './production';
 export * from './session';
 export * from './storage';
-export * from '../../shared/config';

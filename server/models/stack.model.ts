@@ -1,6 +1,6 @@
 import { model, Schema, Document, Model } from 'mongoose';
 
-import { ImageBuffer } from '../interfaces';
+import { ImageBuffer } from '@server/interfaces';
 
 const { ObjectId } = Schema.Types;
 

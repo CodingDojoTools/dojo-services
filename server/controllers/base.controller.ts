@@ -1,4 +1,4 @@
-import { CRUD, Request, Response } from '../interfaces';
+import { CRUD, Request, Response } from '@server/interfaces';
 import { Document, Model } from 'mongoose';
 
 export abstract class BaseController implements CRUD {

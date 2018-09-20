@@ -1,4 +1,4 @@
-import { stackVariantController } from '../controllers';
+import { stackVariantController } from '@server/controllers';
 import { wrapper } from './middleware';
 import { Router } from 'express';
 

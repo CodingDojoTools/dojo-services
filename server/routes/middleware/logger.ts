@@ -1,6 +1,7 @@
-import { Request, Response, NextFunction } from '../../interfaces';
-import { PRODUCTION } from '../../config';
-import { isObject, not } from '../../utils';
+import { Request, Response, NextFunction } from '@server/interfaces';
+import { isObject, not } from '@server/utils';
+import { PRODUCTION } from '@server/config';
+
 import chalk from 'chalk';
 
 export function routeLogger(

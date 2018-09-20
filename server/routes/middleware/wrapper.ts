@@ -4,7 +4,7 @@ import {
   Response,
   NextFunction,
   RequestHandler,
-} from '../../interfaces';
+} from '@server/interfaces';
 
 export function wrapper<T>(
   callback: Asyncable,

@@ -4,5 +4,12 @@
     <app-form-text [parent]='form' placeholder='Address' controlName='address'></app-form-text>
     <app-form-text [parent]='form' placeholder='Alias' controlName='alias'></app-form-text>
     <app-form-text [parent]='form' placeholder='Phone Number' controlName='phone' [match]='match'></app-form-text>
+
+    <div class="location-form-actions">
+      <button class="btn cancel-btn" (click)='onCancel()'>Cancel</button>
+      <button class='btn create-btn' *ngIf='!exists' [disabled]='!form.valid' (click)='onCreate(form)'>Create</button>
+      <button class="btn remove-btn" *ngIf='exists' (click)='onRemove(form)'>Remove</button>
+      <button class="btn update-btn" *ngIf='exists' [disabled]='!form.valid || form.pristine' (click)='onUpdate(form)'>Update</button>
+    </div>
   </form>
 </section>

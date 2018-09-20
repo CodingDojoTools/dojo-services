@@ -1,6 +1,16 @@
-<section>
-  <div class='locations-container' *ngFor='let location of locations$ | async | indifferentSort:"city"'>
-    <app-location-card [location]='location'>
-    </app-location-card>
+<section class='container'>
+  <div class="row">
+    <div class="col">
+      <app-button-new text='New Location' routerLink='new'></app-button-new>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class='locations-container' *ngFor='let location of locations$ | async | indifferentSort:"city"'>
+        <app-location-card [location]='location'>
+        </app-location-card>
+      </div>
+    </div>
   </div>
 </section>

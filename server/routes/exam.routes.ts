@@ -1,4 +1,4 @@
-import { examController } from '../controllers';
+import { examController } from '@server/controllers';
 import { wrapper } from './middleware';
 import { Router } from 'express';
 

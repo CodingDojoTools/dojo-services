@@ -1,7 +1,7 @@
-import { SocialUser, Request, Response } from '../interfaces';
+import { SocialUser, Request, Response } from '@server/interfaces';
 import { CreateUpdateUserHelper } from './helpers';
-import { IUser, UserModel, User } from '../models';
-import { tokenOptions } from '../config';
+import { IUser, UserModel, User } from '@server/models';
+import { tokenOptions } from '@server/config';
 
 import {
   GoogleAuthHelper,
@@ -9,7 +9,7 @@ import {
   debug,
   getIP,
   signToken,
-} from '../utils';
+} from '@server/utils';
 
 class AuthController {
   constructor(private readonly model: UserModel) {}

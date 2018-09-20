@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
 import { BaseController } from './base.controller';
-import { UnAuthorizedError } from '../utils';
-import { UserModel, User } from '../models';
+import { UnAuthorizedError } from '@server/utils';
+import { UserModel, User } from '@server/models';
 
 class UserController extends BaseController {
   constructor(user: UserModel) {

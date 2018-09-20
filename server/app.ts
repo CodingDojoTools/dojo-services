@@ -2,15 +2,13 @@ import { json, urlencoded } from 'body-parser';
 import { resolve } from 'path';
 
 import { PRODUCTION, session, TOKEN_SECRET, corsOptions } from './config';
-import { normalizePort, debug } from './utils';
+import { normalizePort, debug, createServer } from './utils';
 import { routes } from './routes';
 
 import * as compress from 'compression';
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as helmet from 'helmet';
-import * as https from 'https';
-import * as http from 'http';
 import * as cors from 'cors';
 
 const port = normalizePort(process.env.PORT || 8000);
@@ -35,7 +33,8 @@ app
   .use(session)
   .use(express.static(resolve('dist/public')))
   .use(cors(corsOptions))
-  .use(routes)
+  .use(routes);
 
-  //
-  .listen(port, () => debug(`Express server listening on port ${port}`));
+const server = createServer(app);
+
+server.listen(port, () => debug(`Express server listening on port ${port}`));

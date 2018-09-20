@@ -1,6 +1,6 @@
-import { UserIP, SocialUser, TokenPayload } from '../../interfaces';
-import { IUser, Identity, IIdentity, User } from '../../models';
-import { GoogleAuthHelper } from '../../utils';
+import { UserIP, SocialUser, TokenPayload } from '@server/interfaces';
+import { IUser, Identity, IIdentity, User } from '@server/models';
+import { GoogleAuthHelper } from '@server/utils';
 
 /**
  * meh..
