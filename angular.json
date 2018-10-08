@@ -9,6 +9,9 @@
       "projectType": "application",
       "prefix": "app",
       "schematics": {
+        "@ngrx/schematics:pipe": {
+          "skipImport": true
+        },
         "@ngrx/schematics:component": {
           "changeDetection": "OnPush",
           "styleext": "scss",

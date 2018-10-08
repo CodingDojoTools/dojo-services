@@ -1,8 +1,9 @@
 import { OAuth2Client } from 'google-auth-library';
 
-import { TokenPayload, Google } from '../interfaces';
-import { PRODUCTION } from '../config';
+import { TokenPayload, Google } from '@server/interfaces';
 import { TokenError, UnAuthorizedError } from './errors';
+import { PRODUCTION } from '@server/config';
+import { not } from './helpers';
 
 const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
@@ -56,6 +57,6 @@ export class GoogleAuthHelper extends AuthHelper {
   }
 
   private notOrgMember(domain: string) {
-    return PRODUCTION && (!domain || !emailReg.test(domain));
+    return PRODUCTION && (not(domain) || not(emailReg.test(domain)));
   }
 }

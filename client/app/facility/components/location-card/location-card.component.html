@@ -1,0 +1,29 @@
+<mat-card class='card container'>
+  <mat-card-content class='row'>
+    <h4 class='text-center' [routerLink]='location._id' [textOnHover]='location.alias'>{{ location.city | titleize }}</h4>
+
+    <div class="col">
+      <div class="address">
+        Address:
+        <p>{{ (location.address | titleize) || 'N/A' }}</p>
+      </div>
+      <div class="phone">
+        Phone:
+        <p>{{ location.phone || 'N/A' }}</p>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="employees">
+        Employees:
+        <p>{{ location.employees.length }}</p>
+      </div>
+      <div class="stacks">
+        Stacks:
+        <p> Future stack content ... </p>
+      </div>
+    </div>
+
+
+  </mat-card-content>
+</mat-card>

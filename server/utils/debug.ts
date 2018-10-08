@@ -1,5 +1,5 @@
+import { ENV } from '@server/config';
 import * as debuggable from 'debug';
-import { ENV } from '../config';
 
 const capped = ENV.charAt(0).toUpperCase() + ENV.substr(1);
 

@@ -4,7 +4,7 @@ import { inspect } from 'util';
 
 import { uri, options } from './dboptions';
 import { PRODUCTION } from './production';
-import { debug } from '../utils';
+import { debug } from '@server/utils';
 
 export const dbConnection = mongoose.connect(
   uri,

@@ -1,4 +1,4 @@
-import { userController } from '../controllers';
+import { userController } from '@server/controllers';
 import { wrapper } from './middleware';
 import { Router } from 'express';
 

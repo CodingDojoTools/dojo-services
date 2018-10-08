@@ -27,6 +27,7 @@ import { CoreRoutingModule } from './core-routing.module';
 
 import * as fromComponents from './components';
 import * as fromContainers from './containers';
+import * as fromServices from './services';
 
 export const COMPONENTS = [
   ...fromComponents.components,
@@ -67,6 +68,7 @@ export class CoreModule {
           provide: RouterStateSerializer,
           useClass: CustomSerializer,
         },
+        ...fromServices.services,
       ],
     };
   }

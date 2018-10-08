@@ -13,7 +13,7 @@ const adapter = createEntityAdapter<Location>({
   selectId: location => location._id,
 });
 
-const initialState = adapter.getInitialState({
+const initialState: LocationState = adapter.getInitialState({
   loading: false,
   loaded: false,
 });

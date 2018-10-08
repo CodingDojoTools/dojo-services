@@ -1,7 +1,7 @@
-import { Options } from 'express-jwt';
-import { PRODUCTION } from './production';
-import { isUndefined } from '../utils';
+import { isUndefined } from '@server/utils';
 import { SignOptions } from 'jsonwebtoken';
+import { PRODUCTION } from './production';
+import { Options } from 'express-jwt';
 
 const devSecret = 'dev-token-secret';
 
@@ -13,6 +13,7 @@ if (PRODUCTION && (isUndefined(TOKEN_SECRET) || TOKEN_SECRET === devSecret)) {
 
 export const jwtOptions: Options = {
   secret: TOKEN_SECRET,
+  requestProperty: 'token',
 };
 /**
  *  algorithm?: string;

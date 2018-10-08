@@ -3,9 +3,10 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 
-import { UserService } from '../../services';
-import { UserActionTypes } from '../actions';
-import * as fromActions from '../actions';
+import { UserService } from '@facility/services';
+import { UserActionTypes } from '@facility/store/actions';
+
+import * as fromActions from '@facility/store/actions';
 import * as fromRouter from '@app/store';
 
 import { debug } from '@app/utils';
@@ -79,5 +80,7 @@ export class UserEffects {
   constructor(
     private actions$: Actions,
     private readonly userService: UserService
-  ) {}
+  ) {
+    console.log(this.loadUsers$);
+  }
 }

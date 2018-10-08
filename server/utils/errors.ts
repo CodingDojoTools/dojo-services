@@ -1,3 +1,5 @@
+import { Http } from '@status/codes';
+
 export abstract class BaseError extends Error {
   abstract readonly code: number;
 }
@@ -5,7 +7,7 @@ export abstract class BaseError extends Error {
 export class UnAuthorizedError extends BaseError {
   message = `You are not authorized to access this resource.
     Contact the adminstrator for more information`;
-  readonly code = 401;
+  readonly code = Http.Unauthorized;
 }
 
 export class TokenError extends UnAuthorizedError {
@@ -13,13 +15,13 @@ export class TokenError extends UnAuthorizedError {
 }
 
 export class BadRequestError extends BaseError {
-  readonly code = 400;
+  readonly code = Http.BadRequest;
 }
 
 export class ServerError extends BaseError {
-  readonly code = 500;
+  readonly code = Http.InternalServerError;
 }
 
 export class NotFoundError extends BaseError {
-  readonly code = 404;
+  readonly code = Http.NotFound;
 }

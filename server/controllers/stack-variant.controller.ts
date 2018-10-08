@@ -1,5 +1,5 @@
+import { StackVariantModel, StackVariant } from '@server/models';
 import { BaseController } from './base.controller';
-import { StackVariantModel, StackVariant } from '../models';
 
 class StackVariantController extends BaseController {
   constructor(variant: StackVariantModel) {

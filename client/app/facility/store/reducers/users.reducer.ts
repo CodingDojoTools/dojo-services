@@ -7,6 +7,7 @@ import { User } from '@auth/models';
 export interface UserState extends EntityState<User> {
   loading: boolean;
   loaded: boolean;
+  selectedUsers: string[];
 }
 
 export const adapter: EntityAdapter<User> = createEntityAdapter<User>({
@@ -16,6 +17,7 @@ export const adapter: EntityAdapter<User> = createEntityAdapter<User>({
 export const initialState: UserState = adapter.getInitialState({
   loading: false,
   loaded: false,
+  selectedUsers: [],
 });
 
 export function reducer(state = initialState, action: UserActions): UserState {
@@ -44,6 +46,14 @@ export function reducer(state = initialState, action: UserActions): UserState {
     case UserActionTypes.RemoveUserSuccess:
       return adapter.removeOne(action.payload._id, state);
 
+    case UserActionTypes.SelectUsers:
+      const { payload: selectedUsers } = action;
+
+      return {
+        ...state,
+        selectedUsers,
+      };
+
     case UserActionTypes.ClearUsers:
       return initialState;
 
@@ -55,4 +65,5 @@ export function reducer(state = initialState, action: UserActions): UserState {
 export const getUserEntities = (state: UserState) => state.entities;
 export const getUsersLoading = (state: UserState) => state.loading;
 export const getUsersLoaded = (state: UserState) => state.loaded;
+export const getSelectedUsers = (state: UserState) => state.selectedUsers;
 export const getUsersIds = (state: UserState) => state.ids;

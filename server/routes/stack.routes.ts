@@ -1,4 +1,4 @@
-import { stackController } from '../controllers';
+import { stackController } from '@server/controllers';
 import { wrapper } from './middleware';
 import { Router } from 'express';
 

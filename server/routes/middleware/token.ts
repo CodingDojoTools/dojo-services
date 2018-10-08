@@ -1,8 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import { TokenError, verifyToken } from '../../utils';
-import { jwtOptions } from '../../config';
+import { TokenError, verifyToken } from '@server/utils';
+import { API, jwtOptions } from '@server/config';
 
 import * as jwt from 'express-jwt';
+
+const providers = new RegExp(`${API}/auth/login/*`, 'i');
 
 export function tokenVerify(
   request: Request,
@@ -18,4 +20,6 @@ export function tokenVerify(
     });
 }
 
-export const tokenAuth = jwt(jwtOptions);
+export const tokenAuth = jwt(jwtOptions).unless({
+  path: [providers],
+});

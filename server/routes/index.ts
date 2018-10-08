@@ -1,7 +1,8 @@
 import { Router } from 'express';
 
-import { API } from '../../shared';
+import { API } from '@server/config';
 import { authRouter } from './auth.routes';
+import { examRouter } from './exam.routes';
 import { locationRouter } from './location.routes';
 import { stackRouter } from './stack.routes';
 import { stackVariantRouter } from './stack-variant.routes';
@@ -14,8 +15,9 @@ export const routes = Router();
 const api = Router();
 
 api
-  .use('/auth', authRouter)
   .use(tokenAuth)
+  .use('/auth', authRouter)
+  .use('/exams', examRouter)
   .use('/locations', locationRouter)
   .use('/stacks', stackRouter)
   .use('/stack_variants', stackVariantRouter)

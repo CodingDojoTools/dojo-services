@@ -21,12 +21,16 @@ import {
   MatTableModule,
 } from '@angular/material';
 
+import * as fromComponents from './components';
+import * as fromDirectives from './directives';
 import * as fromPipes from './pipes';
 
 const declarations: any[] = [
   MatSort,
   MatPaginator,
   MatNavList,
+  ...fromComponents.components,
+  ...fromDirectives.directives,
   ...fromPipes.pipes,
 ];
 

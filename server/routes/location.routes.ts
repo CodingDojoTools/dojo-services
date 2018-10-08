@@ -1,4 +1,4 @@
-import { locationController } from '../controllers';
+import { locationController } from '@server/controllers';
 import { wrapper } from './middleware';
 import { Router } from 'express';
 

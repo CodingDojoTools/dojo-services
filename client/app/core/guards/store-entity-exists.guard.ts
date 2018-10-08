@@ -4,7 +4,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Action, Store, select, MemoizedSelector } from '@ngrx/store';
+import { Action, select, MemoizedSelector } from '@ngrx/store';
 import { Dictionary } from '@ngrx/entity';
 import { switchMap, catchError, tap, map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
@@ -26,16 +26,11 @@ export abstract class StoreEntityExistsGuard<T, A extends Action, D>
   ): Observable<boolean> {
     debug(`CanActive: Entity Exists? ${next.params[this.param]}`);
     return this.checkStore().pipe(
-      switchMap(() =>
-        this.hasEntity(next.params[this.param]).pipe(
-          catchError(error =>
-            of(error).pipe(
-              tap(e =>
-                debug(
-                  `Something went wrong checking entity exists: ${e.message}`
-                )
-              )
-            )
+      switchMap(() => this.hasEntity(next.params[this.param])),
+      catchError(error =>
+        of(error).pipe(
+          tap(e =>
+            debug(`Something went wrong checking entity exists: ${e.message}`)
           )
         )
       )
@@ -55,6 +50,7 @@ export abstract class StoreEntityExistsGuard<T, A extends Action, D>
       this.constructor.name
         .replace(/ExistsGuard$/, '')
         .replace(/[A-Z]/g, (char, index) => (index ? `_${char}` : char))
+        .trim()
         .toLowerCase() + '_id'
     );
   }

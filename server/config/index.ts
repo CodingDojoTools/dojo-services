@@ -1,3 +1,4 @@
+export * from '@shared/config';
 export * from './env';
 export * from './configuration';
 export * from './cors';

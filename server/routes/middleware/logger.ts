@@ -1,6 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
-import { PRODUCTION } from '../../config';
-import { isObject } from '../../utils';
+import { Request, Response, NextFunction } from '@server/interfaces';
+import { isObject, not } from '@server/utils';
+import { PRODUCTION } from '@server/config';
+
 import chalk from 'chalk';
 
 export function routeLogger(
@@ -8,7 +9,7 @@ export function routeLogger(
   _response: Response,
   next: NextFunction
 ): void {
-  if (!PRODUCTION) {
+  if (not(PRODUCTION)) {
     const keys = [
       'method',
       'hostname',

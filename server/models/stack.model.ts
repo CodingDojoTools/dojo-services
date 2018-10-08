@@ -1,6 +1,10 @@
 import { model, Schema, Document, Model } from 'mongoose';
 
+import { ImageBuffer } from '@server/interfaces';
+
 const { ObjectId } = Schema.Types;
+
+// duration ?
 
 const stackSchema = new Schema({
   name: {
@@ -8,6 +12,13 @@ const stackSchema = new Schema({
     trim: true,
     type: String,
     index: true,
+  },
+  image: {
+    data: Buffer,
+    contentType: {
+      type: String,
+      trim: true,
+    },
   },
   variant: {
     type: ObjectId,
@@ -23,6 +34,7 @@ const stackSchema = new Schema({
 
 export interface IStack extends Document {
   name: string;
+  image: ImageBuffer;
   variant: string;
   active: boolean;
 }

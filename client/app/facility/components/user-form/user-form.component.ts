@@ -36,7 +36,7 @@ export class UserFormComponent implements OnChanges {
 
   form: FormGroup = this.fb.group({
     firstName: ['', [Validators.required]],
-    lastName: ['', [Validators.required]],
+    lastName: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required]],
     location: ['', [Validators.required]],
     photoUrl: [''],

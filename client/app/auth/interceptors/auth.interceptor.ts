@@ -9,9 +9,13 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 
+import { LocalStorageService } from '@app/core';
+
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   private readonly bearer = /^Bearer\s/;
+
+  constructor(private readonly localStorageService: LocalStorageService) {}
 
   intercept(
     request: HttpRequest<any>,
@@ -32,7 +36,7 @@ export class AuthInterceptor implements HttpInterceptor {
     if (header && this.isBearer(header)) {
       const token = this.extractToken(header);
 
-      localStorage.setItem('access_token', token);
+      this.localStorageService.setItem('access_token', token);
     }
   }
 
