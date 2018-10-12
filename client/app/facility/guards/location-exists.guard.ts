@@ -20,8 +20,7 @@ export class LocationExistsGuard extends StoreEntityExistsGuard<
 
   constructor(
     protected readonly store: Store<fromStore.FacilitiesState>,
-    @Inject(fromInjectors.LOCATIONS_LOAD)
-    protected loader: fromStore.LocationsLoad
+    @Inject(fromInjectors.LOCATIONS_LOAD) loader: fromStore.LocationsLoad
   ) {
     super(store, loader);
   }

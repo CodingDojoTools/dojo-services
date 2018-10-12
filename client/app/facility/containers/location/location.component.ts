@@ -57,6 +57,6 @@ export class LocationComponent implements OnInit {
   }
 
   onCancel() {
-    this.store.dispatch(new fromRoot.Go({ path: ['locations'] }));
+    this.store.dispatch(new fromRoot.Back());
   }
 }

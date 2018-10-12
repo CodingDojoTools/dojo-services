@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, defer } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import * as fromStore from '@auth/store';
-import * as fromRoot from '@app/store';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
