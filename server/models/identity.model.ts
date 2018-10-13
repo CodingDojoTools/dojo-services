@@ -1,7 +1,7 @@
 import { Document, Model, Schema, model } from 'mongoose';
 
 const { ObjectId } = Schema.Types;
-const identitySchema = new Schema(
+const IdentitySchema = new Schema(
   {
     provider: {
       type: String,
@@ -26,14 +26,19 @@ const identitySchema = new Schema(
   }
 );
 
-export interface IIdentity extends Document {
+export interface IIdentity {
+  _id?: string;
   provider: string;
   providerId: string;
   user: string;
 }
-export interface IdentityModel extends Model<IIdentity> {}
 
-export const Identity: IdentityModel = model<IIdentity>(
+export interface IdentityDocument extends Document, IIdentity {
+  _id: any;
+}
+export interface IdentityModel extends Model<IdentityDocument> {}
+
+export const Identity: IdentityModel = model<IdentityDocument>(
   'Identity',
-  identitySchema
+  IdentitySchema
 );
