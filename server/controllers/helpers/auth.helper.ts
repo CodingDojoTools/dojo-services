@@ -1,5 +1,5 @@
 import { UserIP, SocialUser, TokenPayload } from '@server/interfaces';
-import { IUser, Identity, IIdentity, User } from '@server/models';
+import { UserDocument, Identity, IIdentity, User } from '@server/models';
 import { GoogleAuthHelper } from '@server/utils';
 
 /**
@@ -15,7 +15,7 @@ export class CreateUpdateUserHelper {
     private readonly userData: UserIP
   ) {}
 
-  async getUser(): Promise<IUser> {
+  async getUser(): Promise<UserDocument> {
     const [identity, user] = await this.populate();
 
     if (user && identity) {
@@ -24,7 +24,7 @@ export class CreateUpdateUserHelper {
     return await this.createUserAndIdentity();
   }
 
-  private async populate(): Promise<[IIdentity, IUser]> {
+  private async populate(): Promise<[IIdentity, UserDocument]> {
     return await Promise.all([
       this.findIdentity(this.provider.provider, this.provider.payload.sub),
       this.findUser(this.userData.email || this.provider.payload.email),
@@ -39,13 +39,13 @@ export class CreateUpdateUserHelper {
     return await this.user.findOne({ email }).lean();
   }
 
-  private async createUserAndIdentity(): Promise<IUser> {
+  private async createUserAndIdentity(): Promise<UserDocument> {
     const user = await this.createUser(this.userData);
     await this.createIdentity(this.provider.payload, user._id);
     return user;
   }
 
-  private async createUser(userData: SocialUser): Promise<IUser> {
+  private async createUser(userData: SocialUser): Promise<UserDocument> {
     const user = await this.user.create(userData);
 
     return { ...user.toObject(), isNew: true };
@@ -63,7 +63,10 @@ export class CreateUpdateUserHelper {
     });
   }
 
-  private async updateUser(user: IUser, lastIpAddress: string): Promise<IUser> {
+  private async updateUser(
+    user: UserDocument,
+    lastIpAddress: string
+  ): Promise<UserDocument> {
     return await this.user.findByIdAndUpdate(
       user._id,
       { $set: { lastIpAddress, lastSignIn: Date.now() } },

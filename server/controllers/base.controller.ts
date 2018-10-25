@@ -2,18 +2,24 @@ import { CRUD, Request, Response } from '@server/interfaces';
 import { Document, Model } from 'mongoose';
 
 export abstract class BaseController implements CRUD {
-  constructor(protected model: Model<Document>) {}
-
-  async index(_request: Request, response: Response) {
-    response.json(await this.model.find({}).lean());
+  constructor(protected model: Model<Document>) {
+    if (new.target === BaseController) {
+      throw new Error(
+        'BaseController is an abstract class and may not be instantiated directly'
+      );
+    }
   }
-  async show(request: Request, response: Response) {
+
+  async index(request: Request, response: Response): Promise<any> {
+    response.json(await this.model.find(request.query).lean());
+  }
+  async show(request: Request, response: Response): Promise<any> {
     response.json(await this.model.findById(request.params[this.param]).lean());
   }
-  async create(request: Request, response: Response) {
+  async create(request: Request, response: Response): Promise<any> {
     response.json(await this.model.create(request.body));
   }
-  async update(request: Request, response: Response) {
+  async update(request: Request, response: Response): Promise<any> {
     response.json(
       await this.model
         .findByIdAndUpdate(
@@ -26,7 +32,7 @@ export abstract class BaseController implements CRUD {
         .lean()
     );
   }
-  async destroy(request: Request, response: Response) {
+  async destroy(request: Request, response: Response): Promise<any> {
     response.json(
       await this.model.findByIdAndRemove(request.params[this.param]).lean()
     );

@@ -4,9 +4,7 @@ import { ImageBuffer } from '@server/interfaces';
 
 const { ObjectId } = Schema.Types;
 
-// duration ?
-
-const stackSchema = new Schema({
+export const StackSchema = new Schema({
   name: {
     required: [true, 'Stack name is required information'],
     trim: true,
@@ -32,13 +30,17 @@ const stackSchema = new Schema({
   },
 });
 
-export interface IStack extends Document {
+export interface IStack {
+  _id?: string;
   name: string;
   image: ImageBuffer;
   variant: string;
   active: boolean;
 }
 
-export interface StackModel extends Model<IStack> {}
+export interface StackDocument extends Document, IStack {
+  _id: any;
+}
+export interface StackModel extends Model<StackDocument> {}
 
-export const Stack: StackModel = model<IStack>('Stack', stackSchema);
+export const Stack: StackModel = model<StackDocument>('Stack', StackSchema);

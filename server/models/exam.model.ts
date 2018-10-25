@@ -1,9 +1,10 @@
 import { model, Schema, Document, Model } from 'mongoose';
 import { ImageBuffer } from '@server/interfaces';
+import { StackModel } from './stack.model';
 
 const { ObjectId } = Schema.Types;
 
-const examSchema = new Schema({
+export const ExamSchema = new Schema({
   active: {
     default: true,
     index: true,
@@ -37,16 +38,20 @@ const examSchema = new Schema({
   },
 });
 
-examSchema.index({ stack: 1, option: 1, name: 1 }, { unique: true });
+ExamSchema.index({ stack: 1, option: 1, name: 1 }, { unique: true });
 
-export interface IExam extends Document {
+export interface IExam {
+  _id?: string;
   active: boolean;
   name: string;
   option: string;
-  stack: string;
+  stack: string | StackModel;
   wireframe: ImageBuffer;
 }
 
-export interface ExamModel extends Model<IExam> {}
+export interface ExamDocument extends Document, IExam {
+  _id: any;
+}
+export interface ExamModel extends Model<ExamDocument> {}
 
-export const Exam: ExamModel = model<IExam>('Exam', examSchema);
+export const Exam: ExamModel = model<ExamDocument>('Exam', ExamSchema);

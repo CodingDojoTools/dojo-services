@@ -4,7 +4,7 @@ import { ImageBuffer } from '@server/interfaces';
 
 const { ObjectId } = Schema.Types;
 
-const locationSchema = new Schema({
+export const LocationSchema = new Schema({
   city: {
     required: [true, 'In which city is this Dojo location?'],
     trim: true,
@@ -48,7 +48,8 @@ const locationSchema = new Schema({
   ],
 });
 
-export interface ILocation extends Document {
+export interface ILocation {
+  _id?: string;
   alias: string;
   city: string;
   address: string;
@@ -58,9 +59,12 @@ export interface ILocation extends Document {
   employees: string[];
 }
 
-export interface LocationModel extends Model<ILocation> {}
+export interface LocationDocument extends Document, ILocation {
+  _id: any;
+}
+export interface LocationModel extends Model<LocationDocument> {}
 
-export const Location: LocationModel = model<ILocation>(
+export const Location: LocationModel = model<LocationDocument>(
   'Location',
-  locationSchema
+  LocationSchema
 );

@@ -2,7 +2,7 @@ import { Document, Model, Schema, model } from 'mongoose';
 
 const { ObjectId } = Schema.Types;
 
-const userSchema = new Schema(
+export const UserSchema = new Schema(
   {
     firstName: {
       type: String,
@@ -37,8 +37,8 @@ const userSchema = new Schema(
   }
 );
 
-export interface IUser extends Document {
-  _id: string | any;
+export interface IUser {
+  _id?: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -51,13 +51,16 @@ export interface IUser extends Document {
   location: string;
 }
 
-userSchema.pre('save', function(next) {
+UserSchema.pre('save', function(next) {
   if (this.isNew) {
-    (this as IUser).lastSignIn = new Date();
+    (this as UserDocument).lastSignIn = new Date();
   }
   next();
 });
 
-export interface UserModel extends Model<IUser> {}
+export interface UserDocument extends Document, IUser {
+  _id: any;
+}
+export interface UserModel extends Model<UserDocument> {}
 
-export const User: UserModel = model<IUser>('User', userSchema);
+export const User: UserModel = model<UserDocument>('User', UserSchema);
