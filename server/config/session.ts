@@ -1,15 +1,18 @@
-import { createClient } from 'redis';
+import { createClient, RedisClient, ClientOpts } from 'redis';
 
 import { configuration } from './configuration';
 
 import * as redisStore from 'connect-redis';
 import * as expressSession from 'express-session';
 
-const client = createClient(configuration.sessionStore);
+const client: RedisClient = createClient(configuration.sessionStore);
 const RedisStore = redisStore(expressSession);
 const config = configuration.session;
 
-config.store = new RedisStore({
+/**
+ * @todo temporary
+ */
+config.store = new RedisStore(<any>{
   client,
 });
 

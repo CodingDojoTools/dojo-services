@@ -13,7 +13,7 @@ import {
 })
 export abstract class StoreEntitiesGuard<T, A extends Action>
   implements CanActivate {
-  protected abstract readonly selector: MemoizedSelector<object, boolean>;
+  protected abstract readonly selector: MemoizedSelector<T, boolean>;
 
   constructor(
     protected readonly store: Store<T>,
