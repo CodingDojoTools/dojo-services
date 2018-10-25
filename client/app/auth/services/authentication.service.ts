@@ -10,8 +10,8 @@ import {
 
 import { Observable, from } from 'rxjs';
 
+import { User, LoggedUser } from '@auth/models';
 import { API } from '@app/config';
-import { User } from '@auth/models';
 
 @Injectable({
   providedIn: 'root',
@@ -37,8 +37,8 @@ export class AuthenticationService {
     return this.http.get<Boolean>(`${this.base}/verify/${token}`);
   }
 
-  login(social: SocialUser): Observable<User> {
-    return this.http.post<User>(
+  login(social: SocialUser): Observable<LoggedUser> {
+    return this.http.post<LoggedUser>(
       `${this.base}/login/${social.provider.toLowerCase()}`,
       social
     );

@@ -18,7 +18,7 @@ import { debug } from '@app/utils';
 export abstract class StoreEntityExistsGuard<T, A extends Action, D>
   extends StoreEntitiesGuard<T, A>
   implements CanActivate {
-  protected abstract entities: MemoizedSelector<object, Dictionary<D>>;
+  protected abstract entities: MemoizedSelector<T, Dictionary<D>>;
 
   canActivate(
     next: ActivatedRouteSnapshot,
