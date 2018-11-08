@@ -15,6 +15,8 @@ import {
  */
 import { storeFreeze } from 'ngrx-store-freeze';
 
+import { initState } from './init-state.reducer';
+
 import * as fromRouter from '@ngrx/router-store';
 import * as fromLayout from '@app/core/store';
 
@@ -48,8 +50,8 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 }
 
 export const metaReducers: MetaReducer<State>[] = !environment.production
-  ? [logger, storeFreeze]
-  : [];
+  ? [initState, logger, storeFreeze]
+  : [initState];
 
 /**
  * Layout Reducers

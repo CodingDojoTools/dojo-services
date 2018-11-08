@@ -1,7 +1,10 @@
-<main class="container">
+<main>
   <app-navigation [loggedIn]='loggedIn$ | async' (logout)='onLogout()'>
-
   </app-navigation>
 </main>
-<router-outlet>
-</router-outlet>
+
+<div class="container">
+  <router-outlet>
+  </router-outlet>
+
+</div>

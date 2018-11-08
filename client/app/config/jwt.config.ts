@@ -2,10 +2,12 @@ import { JwtModuleOptions } from '@auth0/angular-jwt';
 
 import { LocalStorageService } from '@app/core/services';
 import { environment } from '@env/environment';
+import { AUTH_KEY } from './auth-key.config';
 import { API } from '@shared/config';
 
 export function tokenGetter() {
-  return LocalStorageService.getItem('access_token');
+  const auth = LocalStorageService.getItem(AUTH_KEY);
+  return auth && auth.status.token;
 }
 
 const whitelistedDomains: string[] = environment.production

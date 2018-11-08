@@ -15,4 +15,5 @@ export interface User {
 export interface LoggedUser {
   user: User;
   isNew: boolean;
+  token: string;
 }

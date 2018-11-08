@@ -42,16 +42,15 @@ class AuthController {
       `Successfully logged in ${user.firstName}. First visit? ${user.isNew}`
     );
 
-    this.setToken(
-      response,
-      await signToken(
-        this.createTokenPayload(user),
-        request.app.get('token_secret'),
-        tokenOptions
-      )
+    const token = await signToken(
+      this.createTokenPayload(user),
+      request.app.get('token_secret'),
+      tokenOptions
     );
 
-    response.json({ user, isNew: user.isNew });
+    this.setToken(response, token);
+
+    response.json({ user, isNew: user.isNew, token });
   }
 
   async logout(request: Request, response: Response) {

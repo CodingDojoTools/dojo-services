@@ -23,6 +23,7 @@ export const configuration: Configuration = {
         promiseLibrary: Promise,
         poolSize: 15,
         useNewUrlParser: true,
+        useCreateIndex: true,
       },
     },
     development: {

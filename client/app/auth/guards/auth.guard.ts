@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 import * as fromStore from '@auth/store';
 import * as fromRoot from '@app/store';
+import { debug } from '@app/utils';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanLoad, CanActivateChild {
@@ -23,6 +24,7 @@ export class AuthGuard implements CanActivate, CanLoad, CanActivateChild {
       ),
       map(([auth, router]) => [auth, router.state.url]),
       map(([authed, url]: [boolean, string]) => {
+        debug(`User is logged in: ${authed}`);
         if (!authed) {
           this.store.dispatch(new fromStore.LoginRedirect(url));
         }

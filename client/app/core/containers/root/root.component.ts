@@ -4,10 +4,13 @@ import { Observable } from 'rxjs';
 
 import * as fromStore from '@auth/store';
 
+import { routeAnimations } from '@app/core/animations';
+
 @Component({
   selector: 'app-root',
   templateUrl: './root.component.html',
   styleUrls: ['./root.component.scss'],
+  animations: [routeAnimations],
 })
 export class RootComponent implements OnInit {
   loggedIn$: Observable<boolean>;
@@ -16,7 +19,6 @@ export class RootComponent implements OnInit {
 
   ngOnInit() {
     this.loggedIn$ = this.store.pipe(select(fromStore.getLoggedIn));
-    this.store.dispatch(new fromStore.AuthInit());
   }
 
   onLogout() {

@@ -1,7 +1,7 @@
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import * as RouterActions from '../actions';

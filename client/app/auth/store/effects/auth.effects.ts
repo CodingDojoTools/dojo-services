@@ -22,6 +22,7 @@ import * as fromRoot from '@app/store';
 import { LocalStorageService } from '@app/core/services';
 import { AuthenticationService } from '@auth/services';
 import { LoggedUser } from '@auth/models';
+import { AUTH_KEY } from '@app/config';
 import { debug } from '@app/utils';
 
 @Injectable()
@@ -79,8 +80,17 @@ export class AuthEffects {
         logged.isNew ? `/facilities/users/${logged.user._id}/profile` : url
     ),
     tap(path => debug(`Path after logging in is ${path}`)),
-    map(path => new fromRoot.Go({ path: [path] })),
+    exhaustMap(path => of(new fromRoot.Go({ path: [path] }))),
     catchError(error => of(new fromActions.LoginFailure(error)))
+  );
+
+  @Effect({ dispatch: false })
+  loginPersist$ = this.actions$.pipe(
+    ofType<fromActions.LoginSuccess>(fromActions.AuthActionTypes.LoginSuccess),
+    map(action => action.payload),
+    tap(payload =>
+      this.localStorageService.setItem(AUTH_KEY, { status: payload })
+    )
   );
 
   @Effect()
@@ -92,19 +102,21 @@ export class AuthEffects {
       fromActions.AuthActionTypes.LoginRedirect
     ),
     map(action => this.returnUrl(action)),
-    map(url => new fromRoot.Go({ path: ['/login'], query: { returnUrl: url } }))
+    exhaustMap(url =>
+      of(new fromRoot.Go({ path: ['/login'], query: { returnUrl: url } }))
+    )
   );
 
   @Effect()
   logout$ = this.actions$.pipe(
     ofType(fromActions.AuthActionTypes.Logout),
-    switchMap(() =>
+    exhaustMap(() =>
       this.authService.logout().pipe(
         map(user => new fromActions.LogoutSuccess(user)),
         catchError(error => of(new fromActions.LogoutFailure(error)))
       )
     ),
-    tap(() => this.localStorageService.removeItem('access_token'))
+    tap(() => this.localStorageService.removeItem(AUTH_KEY))
   );
 
   @Effect()
