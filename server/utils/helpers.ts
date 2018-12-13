@@ -75,3 +75,17 @@ export function isUndefined(value: any): value is undefined {
 export function isType(type: string, value: any): boolean {
   return typeof value === type;
 }
+
+/**
+ * Generate a random number between max and min
+ *
+ * @export
+ * @param {number} [max=1]
+ * @param {number} [min=0]
+ * @returns {number}
+ */
+export function randomNumber(max = 1, min = 0): number {
+  const actualMin = Math.min(min, max);
+  const actualMax = Math.max(min, max);
+  return Math.floor(Math.random() * (actualMax - actualMin) + actualMin);
+}

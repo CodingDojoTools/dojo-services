@@ -26,4 +26,8 @@ export abstract class Seeder {
 
     return { run: false, created: 0 };
   }
+
+  get name(): string {
+    return this.constructor.name;
+  }
 }

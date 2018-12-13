@@ -1,6 +1,6 @@
 import { dice } from 'talisman/metrics/distance/dice';
 import { basename, extname } from 'path';
-import { inObject } from './helpers';
+import { inObject, not } from './helpers';
 
 export async function compare(
   files: Content[],
@@ -19,7 +19,7 @@ class CompareFiles {
     const references = this.mapByExtension(this.references);
 
     for (const extension in files) {
-      if (!inObject(extension, references)) {
+      if (not(inObject(extension, references))) {
         continue;
       }
 
@@ -38,7 +38,7 @@ class CompareFiles {
     for (const file of files) {
       const ext = extname(file.filename).toLowerCase();
 
-      if (!(ext in results)) {
+      if (not(inObject(ext, results))) {
         results[ext] = [];
       }
 

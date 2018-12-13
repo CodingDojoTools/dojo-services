@@ -5,7 +5,7 @@
     "outDir": "../dist/server",
     "module": "commonjs",
     "target": "esnext",
-    "lib": ["esnext"],
+    "lib": ["esnext", "dom"],
     "paths": {
       "@client/*": ["../client/*"],
       "@server/*": ["./*"],

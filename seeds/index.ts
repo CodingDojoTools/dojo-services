@@ -12,15 +12,21 @@ async function run(seeds: any[]) {
     options
   );
 
-  seeds.forEach(async Seed => {
-    const results = await new Seed().seed();
+  const results = await Promise.all(
+    seeds
+      .map(Seed => new Seed())
+      .map(async seed => {
+        const result = await seed.seed();
 
-    console.log(`${Seed.name} created ${results.created} new documents`);
-  });
-  setTimeout(function() {
-    mongoose.connection.close();
-    process.exit(0);
-  }, 1000);
+        return `${seed.name} created ${result.created} new documents`;
+      })
+  );
+
+  await mongoose.connection.close();
+
+  results.forEach(result => console.log(result));
+
+  process.exit(0);
 }
 
 run(seeders);
