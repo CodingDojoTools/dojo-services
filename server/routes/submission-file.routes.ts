@@ -2,9 +2,9 @@ import { submissionFileController } from '@server/controllers';
 import { wrapper } from './middleware';
 import { Router } from 'express';
 
-export const submissionFileRouter = Router();
+export const submissionFileRoutes = Router();
 
-submissionFileRouter
+submissionFileRoutes
   .get('/', wrapper(submissionFileController.index, submissionFileController))
   .post('/', wrapper(submissionFileController.create, submissionFileController))
   .get(

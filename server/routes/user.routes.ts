@@ -2,9 +2,9 @@ import { userController } from '@server/controllers';
 import { wrapper } from './middleware';
 import { Router } from 'express';
 
-export const userRouter = Router();
+export const userRoutes = Router();
 
-userRouter
+userRoutes
   .get('/', wrapper(userController.index, userController))
   .post('/', wrapper(userController.create, userController))
   .get('/:user_id', wrapper(userController.show, userController))

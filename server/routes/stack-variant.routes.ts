@@ -2,9 +2,9 @@ import { stackVariantController } from '@server/controllers';
 import { wrapper } from './middleware';
 import { Router } from 'express';
 
-export const stackVariantRouter = Router();
+export const stackVariantRoutes = Router();
 
-stackVariantRouter
+stackVariantRoutes
   .get('/', wrapper(stackVariantController.index, stackVariantController))
   .post('/', wrapper(stackVariantController.create, stackVariantController))
   .get(

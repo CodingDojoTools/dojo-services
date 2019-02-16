@@ -3,9 +3,9 @@ import { Router } from 'express';
 import { authController } from '@server/controllers';
 import { wrapper } from './middleware';
 
-export const authRouter = Router();
+export const authRoutes = Router();
 
-authRouter
+authRoutes
   // for now
   .post(
     '/login/:provider',

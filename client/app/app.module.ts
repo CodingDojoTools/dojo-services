@@ -1,3 +1,5 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { CoreModule, RootComponent } from '@app/core';
@@ -6,7 +8,14 @@ import { SharedModule } from '@app/shared';
 
 @NgModule({
   declarations: [],
-  imports: [SharedModule, AuthModule.forRoot(), CoreModule.forRoot()],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+
+    SharedModule,
+    // AuthModule.forRoot(),
+    CoreModule.forRoot(),
+  ],
   providers: [],
   bootstrap: [RootComponent],
 })

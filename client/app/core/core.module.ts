@@ -1,7 +1,6 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, Optional, SkipSelf, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { SocialLoginModule } from 'angularx-social-login';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -20,6 +19,8 @@ import { getAuthServiceConfigs, jwtOptions, initialState } from '@app/config';
 // env
 import { environment } from '@env/environment';
 
+import { ErrorsHandler } from './lib';
+
 import { effects, reducers, metaReducers, CustomSerializer } from '@app/store';
 
 import { SharedModule } from '@app/shared';
@@ -29,14 +30,10 @@ import * as fromComponents from './components';
 import * as fromContainers from './containers';
 import * as fromServices from './services';
 
-export const COMPONENTS = [
-  ...fromComponents.components,
-  ...fromContainers.containers,
-];
+const COMPONENTS = [...fromComponents.components, ...fromContainers.containers];
 
 @NgModule({
   imports: [
-    BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
     CoreRoutingModule,
@@ -57,7 +54,7 @@ export const COMPONENTS = [
     EffectsModule.forRoot(effects),
   ],
   declarations: COMPONENTS,
-  exports: COMPONENTS,
+  exports: [...COMPONENTS],
 })
 export class CoreModule {
   static forRoot() {
@@ -67,6 +64,10 @@ export class CoreModule {
         {
           provide: RouterStateSerializer,
           useClass: CustomSerializer,
+        },
+        {
+          provide: ErrorHandler,
+          use: ErrorsHandler,
         },
         ...fromServices.services,
       ],

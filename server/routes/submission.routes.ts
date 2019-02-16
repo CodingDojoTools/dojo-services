@@ -2,9 +2,9 @@ import { submissionController } from '@server/controllers';
 import { wrapper } from './middleware';
 import { Router } from 'express';
 
-export const submissionRouter = Router();
+export const submissionRoutes = Router();
 
-submissionRouter
+submissionRoutes
   .get('/', wrapper(submissionController.index, submissionController))
   .post('/', wrapper(submissionController.create, submissionController))
   .get(

@@ -2,9 +2,9 @@ import { locationController } from '@server/controllers';
 import { wrapper } from './middleware';
 import { Router } from 'express';
 
-export const locationRouter = Router();
+export const locationRoutes = Router();
 
-locationRouter
+locationRoutes
   .get('/', wrapper(locationController.index, locationController))
   .post('/', wrapper(locationController.create, locationController))
   .get('/:location_id', wrapper(locationController.show, locationController))

@@ -36,6 +36,21 @@ export function flatten<T>(arrays: (T | T[])[], results: T[] = []): T[] {
   return results;
 }
 
+export function isEmpty(value: any): boolean {
+  if (isString(value)) {
+    return value.trim().length === 0;
+  }
+
+  if (isType('object', value)) {
+    if (not(Array.isArray(value))) {
+      value = Object.keys(value);
+    }
+    return value.length === 0;
+  }
+
+  return not(value);
+}
+
 export function not(value: any): boolean {
   return !value;
 }
@@ -88,4 +103,10 @@ export function randomNumber(max = 1, min = 0): number {
   const actualMin = Math.min(min, max);
   const actualMax = Math.max(min, max);
   return Math.floor(Math.random() * (actualMax - actualMin) + actualMin);
+}
+
+export function titleize(string: string) {
+  return string.replace(/\w[^\s-]*/g, word => {
+    return word.charAt(0).toUpperCase() + word.substr(1);
+  });
 }

@@ -2,9 +2,9 @@ import { stackController } from '@server/controllers';
 import { wrapper } from './middleware';
 import { Router } from 'express';
 
-export const stackRouter = Router();
+export const stackRoutes = Router();
 
-stackRouter
+stackRoutes
   .get('/', wrapper(stackController.index, stackController))
   .post('/', wrapper(stackController.create, stackController))
   .get('/:stack_id', wrapper(stackController.show, stackController))

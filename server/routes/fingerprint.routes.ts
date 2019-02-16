@@ -2,9 +2,9 @@ import { fingerprintController } from '@server/controllers';
 import { wrapper } from './middleware';
 import { Router } from 'express';
 
-export const fingerprintRouter = Router();
+export const fingerprintRoutes = Router();
 
-fingerprintRouter
+fingerprintRoutes
   .get('/', wrapper(fingerprintController.index, fingerprintController))
   .post('/', wrapper(fingerprintController.create, fingerprintController))
   .get(

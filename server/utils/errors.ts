@@ -1,6 +1,7 @@
+import { CodedError } from '@server/interfaces';
 import { Http } from '@status/codes';
 
-export abstract class BaseError extends Error {
+export abstract class BaseError extends Error implements CodedError {
   abstract readonly code: number;
 }
 

@@ -2,9 +2,9 @@ import { ratingController } from '@server/controllers';
 import { wrapper } from './middleware';
 import { Router } from 'express';
 
-export const ratingRouter = Router();
+export const ratingRoutes = Router();
 
-ratingRouter
+ratingRoutes
   .get('/', wrapper(ratingController.index, ratingController))
   .post('/', wrapper(ratingController.create, ratingController))
   .get('/:rating_id', wrapper(ratingController.show, ratingController))

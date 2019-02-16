@@ -1,10 +1,7 @@
 <main>
-  <app-navigation [loggedIn]='loggedIn$ | async' (logout)='onLogout()'>
+  <app-navigation [loggedIn]="loggedIn$ | async" (logout)="onLogout()">
+    <router-outlet> </router-outlet>
   </app-navigation>
 </main>
 
-<div class="container">
-  <router-outlet>
-  </router-outlet>
-
-</div>
+<div class="container"><router-outlet name="auth"> </router-outlet></div>

@@ -2,9 +2,9 @@ import { ignoreController } from '@server/controllers';
 import { wrapper } from './middleware';
 import { Router } from 'express';
 
-export const ignoreRouter = Router();
+export const ignoreRoutes = Router();
 
-ignoreRouter
+ignoreRoutes
   .get('/', wrapper(ignoreController.index, ignoreController))
   .post('/', wrapper(ignoreController.create, ignoreController))
   .get('/:ignore_id', wrapper(ignoreController.show, ignoreController))

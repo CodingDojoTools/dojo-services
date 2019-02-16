@@ -2,9 +2,9 @@ import { similarityAssessmentController } from '@server/controllers';
 import { wrapper } from './middleware';
 import { Router } from 'express';
 
-export const similarityAssessmentRouter = Router();
+export const similarityAssessmentRoutes = Router();
 
-similarityAssessmentRouter
+similarityAssessmentRoutes
   .get(
     '/',
     wrapper(

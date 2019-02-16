@@ -51,9 +51,9 @@ export interface IUser {
   location: string;
 }
 
-UserSchema.pre('save', function(next) {
+UserSchema.pre<UserDocument>('save', function(next) {
   if (this.isNew) {
-    (this as UserDocument).lastSignIn = new Date();
+    this.lastSignIn = new Date();
   }
   next();
 });

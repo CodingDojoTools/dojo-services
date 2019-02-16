@@ -27,8 +27,8 @@ export class UserEffects {
   @Effect()
   loadUser$ = this.actions$.pipe(
     ofType(UserActionTypes.LoadUser),
-    tap(action =>
-      debug(`action ${action.type} with payload ${(action as any).payload}`)
+    tap((action: fromActions.UserLoad) =>
+      debug(`action ${action.type} with payload ${action.payload}`)
     ),
     map((action: fromActions.UserLoad) => action.payload),
     switchMap(show =>

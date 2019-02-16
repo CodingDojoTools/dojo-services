@@ -2,9 +2,9 @@ import { beltController } from '@server/controllers';
 import { wrapper } from './middleware';
 import { Router } from 'express';
 
-export const beltRouter = Router();
+export const beltRoutes = Router();
 
-beltRouter
+beltRoutes
   .get('/', wrapper(beltController.index, beltController))
   .post('/', wrapper(beltController.create, beltController))
   .get('/:belt_id', wrapper(beltController.show, beltController))

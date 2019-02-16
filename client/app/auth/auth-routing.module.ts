@@ -6,6 +6,7 @@ import * as fromContainers from './containers';
 const routes: Routes = [
   {
     path: 'login',
+    outlet: 'auth',
     component: fromContainers.HomeComponent,
   },
 ];

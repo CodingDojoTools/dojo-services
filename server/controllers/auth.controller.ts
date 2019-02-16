@@ -1,18 +1,20 @@
+import { GoogleAuthHelper, AuthHelper, debug, getIP } from '@server/utils';
 import { SocialUser, Request, Response } from '@server/interfaces';
 import { CreateUpdateUserHelper } from './helpers';
-import { IUser, UserModel, User } from '@server/models';
-import { tokenOptions } from '@server/config';
-
 import {
-  GoogleAuthHelper,
-  AuthHelper,
-  debug,
-  getIP,
-  signToken,
-} from '@server/utils';
+  User,
+  IUser,
+  UserModel,
+  AuthToken,
+  AuthTokenModel,
+  AuthTokenDocument,
+} from '@server/models';
 
 class AuthController {
-  constructor(private readonly model: UserModel) {}
+  constructor(
+    private readonly model: UserModel,
+    private readonly auth: AuthTokenModel
+  ) {}
 
   async googleSignIn(request: Request, response: Response): Promise<any> {
     const { body: userData }: { body: SocialUser } = request;
@@ -27,6 +29,7 @@ class AuthController {
       'google',
       userData
     ).verify();
+
     const lastIpAddress = getIP(request);
     const user = await new CreateUpdateUserHelper(google, {
       ...userData,
@@ -42,32 +45,19 @@ class AuthController {
       `Successfully logged in ${user.firstName}. First visit? ${user.isNew}`
     );
 
-    const token = await signToken(
-      this.createTokenPayload(user),
-      request.app.get('token_secret'),
-      tokenOptions
-    );
+    const token = await this.createToken(user, request.app.get('token_secret'));
 
-    this.setToken(response, token);
+    this.setToken(response, token.token);
 
-    response.json({ user, isNew: user.isNew, token });
+    response.json({ user, isNew: user.isNew, token: token.token });
   }
 
   async logout(request: Request, response: Response) {
-    this.setToken(
-      response,
-      await signToken(
-        {
-          _id: request.token._id,
-        },
-        request.app.get('token_secret'),
-        {
-          expiresIn: 1,
-        }
-      )
-    );
+    const { token } = request;
 
-    response.json(request.user);
+    await this.auth.revoke(token.token);
+
+    response.json(token);
   }
 
   async loggedInUser(request: Request, response: Response) {
@@ -80,14 +70,18 @@ class AuthController {
     response.set('authorization', `Bearer ${token}`);
   }
 
-  private createTokenPayload(user: IUser) {
+  private async createToken(
+    user: IUser,
+    secret: string
+  ): Promise<AuthTokenDocument> {
+    // await this.auth
     /**
      * @todo
      * attach user roles/permissions
      */
 
-    return { _id: user._id };
+    return await this.auth.generate(user._id, secret);
   }
 }
 
-export const authController = new AuthController(User);
+export const authController = new AuthController(User, AuthToken);

@@ -1,4 +1,7 @@
+export * from './apikey.model';
+export * from './auth-token.model';
 export * from './belt.model';
+export * from './channel.model';
 export * from './exam.model';
 export * from './fingerprint.model';
 export * from './identity.model';

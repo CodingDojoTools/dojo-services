@@ -1,3 +1,4 @@
+export * from './api.controller';
 export * from './auth.controller';
 export * from './base.controller';
 export * from './belt.controller';
@@ -6,6 +7,7 @@ export * from './fingerprint.controller';
 export * from './ignore.controller';
 export * from './location.controller';
 export * from './rating.controller';
+export * from './sheets';
 export * from './similarity-assessment.controller';
 export * from './stack-variant.controller';
 export * from './stack.controller';
