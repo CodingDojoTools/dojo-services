@@ -20,9 +20,7 @@ class AuthController {
     const { body: userData }: { body: SocialUser } = request;
 
     debug(
-      `Logging in Google Account for ${userData.firstName} ${
-        userData.lastName
-      } with ${userData.email}`
+      `Logging in Google Account for ${userData.firstName} ${userData.lastName} with ${userData.email}`
     );
 
     const google: GoogleAuthHelper = await AuthHelper.for(

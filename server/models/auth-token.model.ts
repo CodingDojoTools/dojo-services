@@ -44,7 +44,7 @@ AuthTokenSchema.static('revoke', async function(
 ): Promise<AuthTokenDocument> {
   return await AuthToken.findByIdAndUpdate(
     id,
-    { $set: { revoked: true } },
+    { $set: { revoked: true, revokedAt: Date.now() } },
     { new: true }
   );
 });

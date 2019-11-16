@@ -18,6 +18,7 @@ export async function build(
   submission: SubmissionDocument,
   stack: IStack
 ): Promise<ISubmissionFile[]> {
+  // tslint:disable-next-line: no-use-before-declare
   return await FileBuilder.for(submission, stack).build();
 }
 
@@ -37,7 +38,9 @@ export abstract class FileBuilder {
     submission: SubmissionDocument,
     stack: IStack
   ): T {
-    const { link } = submission.source;
+    const {
+      source: { link },
+    } = submission;
 
     try {
       return new TYPES[(extname(link).toLowerCase())](submission, stack) as T;

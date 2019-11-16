@@ -1,4 +1,5 @@
 import { SessionOptions } from 'express-session';
+import { Envirator } from '@status/envirator';
 import { ConnectionOptions } from 'mongoose';
 import { ClientOpts } from 'redis';
 
@@ -8,20 +9,44 @@ import * as Promise from 'bluebird';
 
 global.Promise = Promise;
 
-const SESSION_SECRET = process.env.SESSION_SECRET || 'dev-session';
-const REDIS_PORT = parseInt(process.env.REDIS_PORT, 10) || 6379;
-const REDIS_HOST = process.env.REDIS_HOST || '127.0.0.1';
-const SESSION_AGE = parseInt(process.env.SESSION_AGE, 10) || 43200 * 1000;
+const envirator = new Envirator();
+
+const SESSION_SECRET = envirator.provide('SESSION_SECRET', {
+  defaultValue: 'dev-session',
+});
+const REDIS_PORT = envirator.provide<number>('REDIS_PORT', {
+  defaultValue: 6379,
+  mutators: parseInt,
+});
+const REDIS_HOST = envirator.provide('REDIS_HOST', {
+  defaultValue: '127.0.0.1',
+});
+const SESSION_AGE = envirator.provide<number>('SESSION_AGE', {
+  defaultValue: 43200 * 1000,
+});
+const MONGO_PORT = envirator.provide<number>('MONGO_PORT', {
+  defaultValue: 27017,
+  mutators: parseInt,
+});
+const MONGO_HOST = envirator.provide('MONGO_HOST', {
+  defaultValue: 'localhost',
+});
+const MONGO_POOL = envirator.provide<number>('MONGO_POOL', {
+  defaultValue: 15,
+  mutators: parseInt,
+  productionDefaults: true,
+});
+const DB_USER = envirator.provide('DB_USER', { warnOnly: true });
+const DB_PASSWORD = envirator.provide('DB_PASSWORD', { warnOnly: true });
 
 export const configuration: Configuration = {
   database: {
     default: {
       adapter: 'mongodb',
-      host: 'localhost',
-      port: 27017,
+      host: MONGO_HOST,
+      port: MONGO_PORT,
       options: {
-        promiseLibrary: Promise,
-        poolSize: 15,
+        poolSize: MONGO_POOL,
         useNewUrlParser: true,
         useCreateIndex: true,
       },
@@ -35,8 +60,8 @@ export const configuration: Configuration = {
     production: {
       database: 'dojo_services_production',
       options: {
-        user: process.env.DB_USER,
-        pass: process.env.DB_PASSWORD,
+        user: DB_USER,
+        pass: DB_PASSWORD,
         ssl: true,
       },
     },

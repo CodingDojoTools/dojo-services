@@ -91,7 +91,7 @@ class Walker {
   private skipFiles(skippable: RegExp[]) {
     const self = this;
 
-    return function(item: klaw.Item, enc: string, next: Function): void {
+    return function(item: klaw.Item, _enc: string, next: Function): void {
       if (self.skip(skippable)(item.path)) {
         (this as Transform).push(item);
       }
@@ -109,7 +109,7 @@ class Walker {
    * @memberof Walker
    */
   private skipSize(min: number = 10, max: number = 10000) {
-    return function(item: klaw.Item, enc: string, next: Function): void {
+    return function(item: klaw.Item, _enc: string, next: Function): void {
       if (inRange(item.stats.size, min, max)) {
         (this as Transform).push(item);
       }
